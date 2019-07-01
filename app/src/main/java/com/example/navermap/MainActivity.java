@@ -7,6 +7,7 @@ import androidx.fragment.app.FragmentManager;
 import android.os.Bundle;
 
 import com.naver.maps.geometry.LatLng;
+import com.naver.maps.map.CameraPosition;
 import com.naver.maps.map.MapFragment;
 import com.naver.maps.map.NaverMap;
 import com.naver.maps.map.OnMapReadyCallback;
@@ -30,8 +31,11 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     @Override
     public void onMapReady(@NonNull NaverMap naverMap) {
-        LatLng coord = new LatLng(37.5670135, 126.9783740);
+        LatLng coord = new LatLng(35.9437857, 126.681656);
 
+        CameraPosition cameraPosition =
+                new CameraPosition(coord, 16,45,0);
+        naverMap.setCameraPosition(cameraPosition);
         naverMap.setMapType(NaverMap.MapType.Hybrid);
     }
 }
