@@ -6,10 +6,19 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <fragment
-        android:id="@+id/map_fragment"
+    <!--<fragment-->
+        <!--android:id="@+id/map"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:name="com.naver.maps.map.MapFragment" />-->
+
+    <fragment xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/map"
+        android:name="com.naver.maps.map.MapFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:name="com.naver.maps.map.MapFragment" />
+        app:navermap_locationButtonEnabled="true"
+        app:navermap_tiltGesturesEnabled="false" /> <!--xml 속성을 사용해 현위치 버튼 활성화, 틸트 비활성화-->
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
