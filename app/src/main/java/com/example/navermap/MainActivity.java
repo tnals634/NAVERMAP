@@ -31,5 +31,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     @Override
     public void onMapReady(@NonNull NaverMap naverMap) {
         LatLng coord = new LatLng(37.5670135, 126.9783740);
+
+        naverMap.setMapType(NaverMap.MapType.Hybrid);
     }
 }
