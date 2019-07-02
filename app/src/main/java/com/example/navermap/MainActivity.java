@@ -21,8 +21,11 @@ import com.naver.maps.map.NaverMapOptions;
 import com.naver.maps.map.OnMapReadyCallback;
 import com.naver.maps.map.UiSettings;
 import com.naver.maps.map.overlay.LocationOverlay;
+import com.naver.maps.map.overlay.Marker;
 import com.naver.maps.map.overlay.OverlayImage;
 import com.naver.maps.map.util.FusedLocationSource;
+
+import java.nio.channels.AsynchronousFileChannel;
 
 public class MainActivity extends AppCompatActivity implements OnMapReadyCallback {
 
@@ -45,6 +48,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         }
         locationSource = new FusedLocationSource(this,LOCATION_PERMISSION_REQUEST_CODE);
         mapFragment.getMapAsync(this);
+
     }
 
     @Override
@@ -59,16 +63,17 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     @UiThread
     @Override
     public void onMapReady(@NonNull NaverMap naverMap) {
-        LatLng coord = new LatLng(35.9437857, 126.681656);
+        LatLng coord = new LatLng(35.9423408, 126.6832079);
+        Marker marker = new Marker();
 
         CameraPosition cameraPosition =
                 new CameraPosition(coord, 16,45,0);
         naverMap.setCameraPosition(cameraPosition);
         //naverMap.setMapType(NaverMap.MapType.Hybrid);
 
-        UiSettings uiSettings = naverMap.getUiSettings();
-        uiSettings.setCompassEnabled(false); //나침반 비활성화
-        uiSettings.setLocationButtonEnabled(true); //현위치 버튼 활성화
+        //UiSettings uiSettings = naverMap.getUiSettings();
+        //uiSettings.setCompassEnabled(false); //나침반 비활성화
+        //uiSettings.setLocationButtonEnabled(true); //현위치 버튼 활성화
 
         //uiSettings.setTiltGesturesEnabled(false); // 틸트 비활성화
         //uiSettings.setRotateGesturesEnabled(false); // 회전 제스처 비활성화
@@ -78,9 +83,9 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                 //.tiltGesturesEnabled(false); //초깃값 지정시 현위치 버튼 활성화, 틸트 제스처 비활성화
 
         
-//        naverMap.setOnMapClickListener((pointF, latLng) ->
-//                Toast.makeText(this,latLng.latitude+", "+ latLng.longitude,
-//                        Toast.LENGTH_SHORT).show()); //클릭시 좌표 뜸
+        naverMap.setOnMapClickListener((pointF, latLng) ->
+                Toast.makeText(this,latLng.latitude+", "+ latLng.longitude,
+                        Toast.LENGTH_SHORT).show()); //클릭시 좌표 뜸
 
 //        naverMap.setOnMapLongClickListener((pointF, latLng) ->
 //                Toast.makeText(this,latLng.latitude + ", " +latLng.longitude,
@@ -113,13 +118,19 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 //        }); //두손가락 탭 시 경도와 위도 표출
 
 
-        naverMap.setLocationSource(locationSource);
+//        naverMap.setLocationSource(locationSource);
+//
+//        naverMap.setLocationTrackingMode(LocationTrackingMode.None);
+//
+//
+//        naverMap.addOnLocationChangeListener(location -> Toast.makeText(this,
+//                location.getLatitude() + ", " + location.getLatitude(),
+//                Toast.LENGTH_SHORT).show());
 
-        naverMap.setLocationTrackingMode(LocationTrackingMode.None);
 
+        LocationOverlay locationOverlay = naverMap.getLocationOverlay();
 
-        naverMap.addOnLocationChangeListener(location -> Toast.makeText(this,
-                location.getLatitude() + ", " + location.getLatitude(),
-                Toast.LENGTH_SHORT).show());
+        marker.setPosition(coord);
+        marker.setMap(naverMap);
     }
 }
