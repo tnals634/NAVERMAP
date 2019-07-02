@@ -116,5 +116,10 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         naverMap.setLocationSource(locationSource);
 
         naverMap.setLocationTrackingMode(LocationTrackingMode.None);
+
+
+        naverMap.addOnLocationChangeListener(location -> Toast.makeText(this,
+                location.getLatitude() + ", " + location.getLatitude(),
+                Toast.LENGTH_SHORT).show());
     }
 }
