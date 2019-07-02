@@ -310,5 +310,6 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         //polygon.setColor(Color.BLUE); //폴리곤 오버레이의 면색상 지정
 
         polygon.setOutlineWidth(5); //폴리곤 오버레이 테두리 두께 5픽셀 지정
+        polygon.setOutlineColor(Color.GREEN); // 폴리곤 오버레이 테두리 색상 지정
     }
 }
