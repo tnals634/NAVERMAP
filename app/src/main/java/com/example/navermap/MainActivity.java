@@ -29,6 +29,7 @@ import com.naver.maps.map.overlay.LocationOverlay;
 import com.naver.maps.map.overlay.Marker;
 import com.naver.maps.map.overlay.Overlay;
 import com.naver.maps.map.overlay.OverlayImage;
+import com.naver.maps.map.overlay.PathOverlay;
 import com.naver.maps.map.overlay.PolygonOverlay;
 import com.naver.maps.map.overlay.PolylineOverlay;
 import com.naver.maps.map.util.FusedLocationSource;
@@ -82,10 +83,11 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         InfoWindow infoWindow = new InfoWindow();
         PolylineOverlay polyline = new PolylineOverlay();
         CircleOverlay circle = new CircleOverlay();
+        PathOverlay path = new PathOverlay();
 
-        CameraPosition cameraPosition =
-                new CameraPosition(coord, 16,45,0);
-        naverMap.setCameraPosition(cameraPosition);
+//        CameraPosition cameraPosition =
+//                new CameraPosition(coord, 16,45,0);
+//        naverMap.setCameraPosition(cameraPosition);
         //naverMap.setMapType(NaverMap.MapType.Hybrid);
 
         //UiSettings uiSettings = naverMap.getUiSettings();
@@ -315,14 +317,26 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 //        polygon.setOutlineColor(Color.GREEN); // 폴리곤 오버레이 테두리 색상 지정
 
 
-        //서클 오버레이 객체를 지도에 추가
-        circle.setCenter(coord); //서클 오버레이의 중심점
-        circle.setRadius(500); //서클 오버레이 반경
-        circle.setColor(Color.RED); //서클 오버레이 색상
-        circle.setOutlineWidth(10); //서클 오버레이의 테두리 두께
-        circle.setOutlineColor(Color.YELLOW); // 서클 오버레이의 테두리 색상
-        circle.setMap(naverMap);
+//        //서클 오버레이 객체를 지도에 추가
+//        circle.setCenter(coord); //서클 오버레이의 중심점
+//        circle.setRadius(500); //서클 오버레이 반경
+//        circle.setColor(Color.RED); //서클 오버레이 색상
+//        circle.setOutlineWidth(10); //서클 오버레이의 테두리 두께
+//        circle.setOutlineColor(Color.YELLOW); // 서클 오버레이의 테두리 색상
+//        circle.setMap(naverMap);
+//
+//        circle.setMap(null); //서클 오버레이 지도에서 제거
 
-        circle.setMap(null); //서클 오버레이 제거
+
+        //경로선 오버레이 생성 및 지도에 추가
+        path.setCoords(Arrays.asList(
+                new LatLng(37.57152, 126.97714),
+                new LatLng(37.56607, 126.98268),
+                new LatLng(37.56445, 126.97707),
+                new LatLng(37.55855, 126.97822)
+        ));
+        path.setMap(naverMap);
+
+        //path.setMap(null); // 경로선 오버레이 지도에서 제거
     }
 }
