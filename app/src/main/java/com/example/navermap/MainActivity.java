@@ -275,7 +275,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 //        polyline.setJoinType(PolylineOverlay.LineJoin.Round); // 오버레이 연결점 모양 지정
 
 
-        //폴리곤 오버레이 객체 생성 / 지도에 추가
+//        //폴리곤 오버레이 객체 생성 / 지도에 추가
         PolygonOverlay polygon = new PolygonOverlay();
         polygon.setCoords(Arrays.asList(
                 new LatLng(37.5640984, 126.9712268),
@@ -285,20 +285,26 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                 new LatLng(37.5590777, 126.974617)
         ));
         polygon.setMap(naverMap);
+//
+//        //polygon.setMap(null); //폴리곤 오버레이를 지도에서 제거
+//
+//        List<LatLng> coords = new ArrayList<>();
+//        Collections.addAll(coords,
+//                new LatLng(37.5640984, 126.9712268),
+//                new LatLng(37.5651279, 126.9767904),
+//                new LatLng(37.5625365, 126.9832241),
+//                new LatLng(37.5585305, 126.9809297),
+//                new LatLng(37.5590777, 126.974617)
+//        );
+//        polygon.setCoords(coords);
+//
+//        coords.set(0, new LatLng(37.5734571, 126.975335));// 아직 반영되지 않음
+//        polygon.setCoords(coords);// 반영됨
 
-        //polygon.setMap(null); //폴리곤 오버레이를 지도에서 제거
-
-        List<LatLng> coords = new ArrayList<>();
-        Collections.addAll(coords,
-                new LatLng(37.5640984, 126.9712268),
-                new LatLng(37.5651279, 126.9767904),
-                new LatLng(37.5625365, 126.9832241),
-                new LatLng(37.5585305, 126.9809297),
-                new LatLng(37.5590777, 126.974617)
-        );
-        polygon.setCoords(coords);
-
-        coords.set(0, new LatLng(37.5734571, 126.975335));// 아직 반영되지 않음
-        polygon.setCoords(coords);// 반영됨
+        polygon.setHoles(Collections.singletonList(Arrays.asList(
+                new LatLng(37.5612243, 126.9768938),
+                new LatLng(37.5627692, 126.9795502),
+                new LatLng(37.5628377, 126.976066)
+        )));
     }
 }
