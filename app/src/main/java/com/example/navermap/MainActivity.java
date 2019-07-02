@@ -14,6 +14,7 @@ import android.widget.Toast;
 import com.naver.maps.geometry.LatLng;
 import com.naver.maps.geometry.LatLngBounds;
 import com.naver.maps.map.CameraPosition;
+import com.naver.maps.map.LocationTrackingMode;
 import com.naver.maps.map.MapFragment;
 import com.naver.maps.map.NaverMap;
 import com.naver.maps.map.NaverMapOptions;
@@ -37,14 +38,13 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         FragmentManager fm = getSupportFragmentManager();
         MapFragment mapFragment = (MapFragment)fm.findFragmentById(R.id.map);
 
+
         if (mapFragment == null) {
             mapFragment = MapFragment.newInstance();
             fm.beginTransaction().add(R.id.map, mapFragment).commit();
         }
-
-        mapFragment.getMapAsync(this);
-
         locationSource = new FusedLocationSource(this,LOCATION_PERMISSION_REQUEST_CODE);
+        mapFragment.getMapAsync(this);
     }
 
     @Override
@@ -66,9 +66,9 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         naverMap.setCameraPosition(cameraPosition);
         //naverMap.setMapType(NaverMap.MapType.Hybrid);
 
-        //UiSettings uiSettings = naverMap.getUiSettings();
-        //uiSettings.setCompassEnabled(false); //나침반 비활성화
-        //uiSettings.setLocationButtonEnabled(true); //현위치 버튼 활성화
+        UiSettings uiSettings = naverMap.getUiSettings();
+        uiSettings.setCompassEnabled(false); //나침반 비활성화
+        uiSettings.setLocationButtonEnabled(true); //현위치 버튼 활성화
 
         //uiSettings.setTiltGesturesEnabled(false); // 틸트 비활성화
         //uiSettings.setRotateGesturesEnabled(false); // 회전 제스처 비활성화
@@ -106,10 +106,15 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 //        }); //더블탭 시 경도와 위도 표출
 
 
-        naverMap.setOnMapTwoFingerTapListener((pointF, latLng) -> {
-            Toast.makeText(this,latLng.latitude + ", " + latLng.longitude,
-                    Toast.LENGTH_SHORT).show();
-            return true;
-        }); //두손가락 탭 시 경도와 위도 표출
+//        naverMap.setOnMapTwoFingerTapListener((pointF, latLng) -> {
+//            Toast.makeText(this,latLng.latitude + ", " + latLng.longitude,
+//                    Toast.LENGTH_SHORT).show();
+//            return true;
+//        }); //두손가락 탭 시 경도와 위도 표출
+
+
+        naverMap.setLocationSource(locationSource);
+
+        naverMap.setLocationTrackingMode(LocationTrackingMode.None);
     }
 }
