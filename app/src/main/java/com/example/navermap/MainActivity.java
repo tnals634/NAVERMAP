@@ -134,8 +134,8 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         marker.setPosition(coord);
         marker.setIcon(MarkerIcons.BLACK);
-        marker.setIconTintColor(Color.RED);
-        marker.setWidth(50);
+        marker.setIcon(OverlayImage.fromResource(R.drawable.marker_icon));
+        marker.setWidth(60);
         marker.setHeight(80);
         marker.setMap(naverMap);
 
