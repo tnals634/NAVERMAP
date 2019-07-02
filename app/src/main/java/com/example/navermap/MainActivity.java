@@ -430,5 +430,17 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         arrowheadPath.setMap(naverMap);
 
         //arrowheadPath.setMap(null); //화살표 오버레이 지도에서 제거
+
+        //화살표 오버레이 좌표열 중 일부 변경
+        List<LatLng> coords = new ArrayList<>();
+        Collections.addAll(coords,
+                new LatLng(37.568003, 126.9772503),
+                new LatLng(37.5701573, 126.9772503),
+                new LatLng(37.5701573, 126.9793745)
+        );
+        arrowheadPath.setCoords(coords);
+
+        coords.set(0, new LatLng(37.5734571, 126.975335));// 아직 반영되지 않음
+        arrowheadPath.setCoords(coords);// 반영됨
     }
 }
