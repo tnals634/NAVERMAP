@@ -25,6 +25,7 @@ import com.naver.maps.map.overlay.Align;
 import com.naver.maps.map.overlay.InfoWindow;
 import com.naver.maps.map.overlay.LocationOverlay;
 import com.naver.maps.map.overlay.Marker;
+import com.naver.maps.map.overlay.Overlay;
 import com.naver.maps.map.overlay.OverlayImage;
 import com.naver.maps.map.util.FusedLocationSource;
 import com.naver.maps.map.util.MarkerIcons;
@@ -137,15 +138,15 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         LocationOverlay locationOverlay = naverMap.getLocationOverlay();
 
-//        marker.setPosition(coord);
-//        marker.setIcon(MarkerIcons.BLACK); //해당 색으로 지정
+        marker.setPosition(coord);
+        marker.setIcon(MarkerIcons.BLACK); //해당 색으로 지정
 //        marker.setIcon(Color.RED); //해당 색으로 바꿈
 //        marker.setIcon(OverlayImage.fromResource(R.drawable.marker_icon)); //내가 다운받은 아이콘으로 설정
-        //marker.setWidth(Marker.SIZE_AUTO); //가로 사이즈 조정
-        //marker.setHeight(Marker.SIZE_AUTO); //세로 사이즈 조정
+        marker.setWidth(Marker.SIZE_AUTO); //가로 사이즈 조정
+        marker.setHeight(Marker.SIZE_AUTO); //세로 사이즈 조정
         //marker.setAngle(90); // 각도 조정
         //marker.setFlat(true); // 눕힘
-        //marker.setIconPerspectiveEnabled(true); //원근 효과
+        marker.setIconPerspectiveEnabled(true); //원근 효과
 
         //marker.setCaptionText("주 캡션"); //캡션 택스트 설정
         //marker.setCaptionRequestedWidth(200); // 텍스트 줄바꿈
@@ -162,7 +163,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
 //        marker.setAlpha(0.5f); //marker 불투명도
 
-//        marker.setMap(naverMap);
+        marker.setMap(naverMap);
 
 
 //        marker1.setPosition(new LatLng(35.9448724,126.6818884));
@@ -181,11 +182,34 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         //정보 창을 군산대학교 좌표에 열음
         infoWindow.setPosition(coord);
-        //infoWindow.open(naverMap);
+        infoWindow.open(naverMap);
 
         //infoWindow.close(); // 정보 창을 닫음
+//
+//        infoWindow.setMap(naverMap); //map 속성을 이용해 정보창을 열음
+//        infoWindow.setMap(null);//map 속성을 이용해 정보창을 닫음
 
-        infoWindow.setMap(naverMap); //map 속성을 이용해 정보창을 열음
-        infoWindow.setMap(null);//map 속성을 이용해 정보창을 닫음
+        //지도를 클릭하면 정보 창을 닫음
+        naverMap.setOnMapClickListener((lanLng, point)->{
+            infoWindow.close();
+        });
+
+        //마커를 클릭하면
+        Overlay.OnClickListener listener = overlay -> {
+
+            if(marker.getInfoWindow() == null)
+            {
+                //현재 마커에 정보 창이 열려있지 않을 경우 엶
+                infoWindow.open(marker);
+            }
+            else
+            {
+                //이미 현재 마커에 정보 창이 열려있을 경우 닫음
+                infoWindow.close();
+            }
+            return true;
+        };
+
+        marker.setOnClickListener(listener);
     }
 }
