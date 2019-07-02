@@ -316,8 +316,11 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
 
         //서클 오버레이 객체를 지도에 추가
-        circle.setCenter(coord);
-        circle.setRadius(500);
+        circle.setCenter(coord); //서클 오버레이의 중심점
+        circle.setRadius(500); //서클 오버레이 반경
+        circle.setColor(Color.RED); //서클 오버레이 색상
+        circle.setOutlineWidth(10); //서클 오버레이의 테두리 두께
+        circle.setOutlineColor(Color.YELLOW); // 서클 오버레이의 테두리 색상
         circle.setMap(naverMap);
 
         circle.setMap(null); //서클 오버레이 제거
