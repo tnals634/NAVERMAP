@@ -99,11 +99,17 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 //        });
 
 
-        naverMap.setOnMapDoubleTapListener((pointF, latLng) -> {
+//        naverMap.setOnMapDoubleTapListener((pointF, latLng) -> {
+//            Toast.makeText(this,latLng.latitude + ", " + latLng.longitude,
+//                    Toast.LENGTH_SHORT).show();
+//            return true;
+//        }); //더블탭 시 경도와 위도 표출
+
+
+        naverMap.setOnMapTwoFingerTapListener((pointF, latLng) -> {
             Toast.makeText(this,latLng.latitude + ", " + latLng.longitude,
                     Toast.LENGTH_SHORT).show();
             return true;
-        });
-
+        }); //두손가락 탭 시 경도와 위도 표출
     }
 }
