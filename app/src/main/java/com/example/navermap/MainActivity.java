@@ -147,9 +147,9 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         //marker.setCaptionRequestedWidth(200); // 텍스트 줄바꿈
         //marker.setCaptionAlign(Align.Top); //캡션 위치 설정 (위에 배치
         //marker.setCaptionOffset(30);//아이콘과 켑션 사이 30픽셀의 간격 지정
-        marker.setCaptionColor(Color.BLUE); //캡션을 파란색으로 지정
-        marker.setCaptionHaloColor(Color.rgb(200,255,200)); //캡션 외곽선을 연한 녹색으로 지정
-
+        //marker.setCaptionColor(Color.BLUE); //캡션을 파란색으로 지정
+        //marker.setCaptionHaloColor(Color.rgb(200,255,200)); //캡션 외곽선을 연한 녹색으로 지정
+        marker.setCaptionTextSize(16); //캡션 사이즈 16dp로 지정
         marker.setMap(naverMap);
 
 
