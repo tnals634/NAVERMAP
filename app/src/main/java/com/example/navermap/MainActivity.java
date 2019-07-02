@@ -1,6 +1,7 @@
 package com.example.navermap;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.annotation.UiThread;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
@@ -59,22 +60,26 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         CameraPosition cameraPosition =
                 new CameraPosition(coord, 16,45,0);
         naverMap.setCameraPosition(cameraPosition);
-        naverMap.setMapType(NaverMap.MapType.Hybrid);
+        //naverMap.setMapType(NaverMap.MapType.Hybrid);
 
-        UiSettings uiSettings = naverMap.getUiSettings();
+        //UiSettings uiSettings = naverMap.getUiSettings();
         //uiSettings.setCompassEnabled(false); //나침반 비활성화
         //uiSettings.setLocationButtonEnabled(true); //현위치 버튼 활성화
 
-        uiSettings.setTiltGesturesEnabled(false); // 틸트 비활성화
-        uiSettings.setRotateGesturesEnabled(false); // 회전 제스처 비활성화
+        //uiSettings.setTiltGesturesEnabled(false); // 틸트 비활성화
+        //uiSettings.setRotateGesturesEnabled(false); // 회전 제스처 비활성화
 
-        NaverMapOptions options = new NaverMapOptions()
-                .locationButtonEnabled(true)
-                .tiltGesturesEnabled(false); //초깃값 지정시 현위치 버튼 활성화, 틸트 제스처 비활성화
+        //NaverMapOptions options = new NaverMapOptions()
+                //.locationButtonEnabled(true)
+                //.tiltGesturesEnabled(false); //초깃값 지정시 현위치 버튼 활성화, 틸트 제스처 비활성화
 
-        naverMap.setOnMapClickListener((point, coord) ->
-                Toast.makeText(this, coord.latitude + ", " + coord.longitude,
-                        Toast.LENGTH_SHORT).show());
+//        naverMap.setOnMapClickListener((pointF, latLng) ->
+//                Toast.makeText(this,latLng.latitude+", "+ latLng.longitude,
+//                        Toast.LENGTH_SHORT).show()); //클릭시 좌표 뜸
+
+        naverMap.setOnMapLongClickListener((pointF, latLng) ->
+                Toast.makeText(this,latLng.latitude + ", " +latLng.longitude,
+                        Toast.LENGTH_SHORT).show()); //롱클릭시 좌표 뜸
 
 
     }
