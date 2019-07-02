@@ -246,6 +246,6 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         )); // 폴리라인 오버레이 객체 생성
 
         polyline.setMap(naverMap); //생성한 폴리라인 오버레이 지도에 추가
-
+        polyline.setMap(null); //오버레이를 지도에서 제거
     }
 }
