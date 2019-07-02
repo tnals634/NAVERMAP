@@ -21,6 +21,7 @@ import com.naver.maps.map.NaverMap;
 import com.naver.maps.map.NaverMapOptions;
 import com.naver.maps.map.OnMapReadyCallback;
 import com.naver.maps.map.UiSettings;
+import com.naver.maps.map.overlay.Align;
 import com.naver.maps.map.overlay.LocationOverlay;
 import com.naver.maps.map.overlay.Marker;
 import com.naver.maps.map.overlay.OverlayImage;
@@ -141,8 +142,10 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         //marker.setAngle(90); // 각도 조정
         //marker.setFlat(true); // 눕힘
         //marker.setIconPerspectiveEnabled(true); //원근 효과
-        marker.setCaptionText("아주아주아주아주아주 아주아주아주 긴 캡션"); //캡션 택스트 설정
-        marker.setCaptionRequestedWidth(200); // 텍스트 줄바꿈
+        marker.setCaptionText("Hello"); //캡션 택스트 설정
+        //marker.setCaptionRequestedWidth(200); // 텍스트 줄바꿈
+        marker.setCaptionAlign(Align.Top); //캡션 위치 설정 (위에 배치
+        marker.setCaptionOffset(30);//아이콘과 켑션 사이 30픽셀의 간격 지정
         marker.setMap(naverMap);
 
 
