@@ -27,6 +27,7 @@ import com.naver.maps.map.overlay.CircleOverlay;
 import com.naver.maps.map.overlay.InfoWindow;
 import com.naver.maps.map.overlay.LocationOverlay;
 import com.naver.maps.map.overlay.Marker;
+import com.naver.maps.map.overlay.MultipartPathOverlay;
 import com.naver.maps.map.overlay.Overlay;
 import com.naver.maps.map.overlay.OverlayImage;
 import com.naver.maps.map.overlay.PathOverlay;
@@ -84,6 +85,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         PolylineOverlay polyline = new PolylineOverlay();
         CircleOverlay circle = new CircleOverlay();
         PathOverlay path = new PathOverlay();
+        MultipartPathOverlay multipartPath = new MultipartPathOverlay();
 
 //        CameraPosition cameraPosition =
 //                new CameraPosition(coord, 16,45,0);
@@ -328,28 +330,59 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 //        circle.setMap(null); //서클 오버레이 지도에서 제거
 
 
-        //경로선 오버레이 생성 및 지도에 추가
-        path.setCoords(Arrays.asList(
-                new LatLng(37.57152, 126.97714),
-                new LatLng(37.56607, 126.98268),
-                new LatLng(37.56445, 126.97707),
-                new LatLng(37.55855, 126.97822)
-        ));
-        path.setMap(naverMap);
+//        //경로선 오버레이 생성 및 지도에 추가
+//        path.setCoords(Arrays.asList(
+//                new LatLng(37.57152, 126.97714),
+//                new LatLng(37.56607, 126.98268),
+//                new LatLng(37.56445, 126.97707),
+//                new LatLng(37.55855, 126.97822)
+//        ));
+//        path.setMap(naverMap);
 
         //path.setMap(null); // 경로선 오버레이 지도에서 제거
 
-        //경로선 오버레이의 좌표열 중 일부 변경
-        List<LatLng> coords = new ArrayList<>();
-        Collections.addAll(coords,
-                new LatLng(37.57152, 126.97714),
-                new LatLng(37.56607, 126.98268),
-                new LatLng(37.56445, 126.97707),
-                new LatLng(37.55855, 126.97822)
-        );
-        path.setCoords(coords);
+//        //경로선 오버레이의 좌표열 중 일부 변경
+//        List<LatLng> coords = new ArrayList<>();
+//        Collections.addAll(coords,
+//                new LatLng(37.57152, 126.97714),
+//                new LatLng(37.56607, 126.98268),
+//                new LatLng(37.56445, 126.97707),
+//                new LatLng(37.55855, 126.97822)
+//        );
+//        path.setCoords(coords);
+//
+//        coords.set(0, new LatLng(37.5734571, 126.975335));// 아직 반영되지 않음
+//        path.setCoords(coords);// 반영됨
 
-        coords.set(0, new LatLng(37.5734571, 126.975335));// 아직 반영되지 않음
-        path.setCoords(coords);// 반영됨
+//        path.setWidth(30);//경로 오버레이 두께 지정
+//        path.setOutlineWidth(5); // 경로 오버레이 테두리 두께 지정
+
+
+        //멀티파트 경로선 오버레이 생성 및 지도에 추가/제거
+        multipartPath.setCoordParts(Arrays.asList(
+                Arrays.asList(
+                        new LatLng(37.5744287, 126.982625),
+                        new LatLng(37.57152, 126.97714),
+                        new LatLng(37.56607, 126.98268)
+                ),
+                Arrays.asList(
+                        new LatLng(37.56607, 126.98268),
+                        new LatLng(37.56445, 126.97707),
+                        new LatLng(37.55855, 126.97822)
+                )
+        ));
+
+        multipartPath.setColorParts(Arrays.asList(
+                new MultipartPathOverlay.ColorPart(
+                        Color.RED, Color.WHITE, Color.GRAY, Color.LTGRAY),
+                new MultipartPathOverlay.ColorPart(
+                        Color.GREEN, Color.WHITE, Color.DKGRAY, Color.LTGRAY)
+        ));
+
+        multipartPath.setMap(naverMap);
+
+        //multipartPath.setMap(null);//경로선 오버레이 지도에서 제거
+
+
     }
 }
