@@ -338,5 +338,18 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         path.setMap(naverMap);
 
         //path.setMap(null); // 경로선 오버레이 지도에서 제거
+
+        //경로선 오버레이의 좌표열 중 일부 변경
+        List<LatLng> coords = new ArrayList<>();
+        Collections.addAll(coords,
+                new LatLng(37.57152, 126.97714),
+                new LatLng(37.56607, 126.98268),
+                new LatLng(37.56445, 126.97707),
+                new LatLng(37.55855, 126.97822)
+        );
+        path.setCoords(coords);
+
+        coords.set(0, new LatLng(37.5734571, 126.975335));// 아직 반영되지 않음
+        path.setCoords(coords);// 반영됨
     }
 }
