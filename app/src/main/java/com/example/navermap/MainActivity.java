@@ -23,6 +23,7 @@ import com.naver.maps.map.NaverMapOptions;
 import com.naver.maps.map.OnMapReadyCallback;
 import com.naver.maps.map.UiSettings;
 import com.naver.maps.map.overlay.Align;
+import com.naver.maps.map.overlay.CircleOverlay;
 import com.naver.maps.map.overlay.InfoWindow;
 import com.naver.maps.map.overlay.LocationOverlay;
 import com.naver.maps.map.overlay.Marker;
@@ -80,10 +81,11 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         Marker marker1 = new Marker();
         InfoWindow infoWindow = new InfoWindow();
         PolylineOverlay polyline = new PolylineOverlay();
+        CircleOverlay circle = new CircleOverlay();
 
-//        CameraPosition cameraPosition =
-//                new CameraPosition(coord, 16,45,0);
-//        naverMap.setCameraPosition(cameraPosition);
+        CameraPosition cameraPosition =
+                new CameraPosition(coord, 16,45,0);
+        naverMap.setCameraPosition(cameraPosition);
         //naverMap.setMapType(NaverMap.MapType.Hybrid);
 
         //UiSettings uiSettings = naverMap.getUiSettings();
@@ -276,15 +278,15 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
 
 //        //폴리곤 오버레이 객체 생성 / 지도에 추가
-        PolygonOverlay polygon = new PolygonOverlay();
-        polygon.setCoords(Arrays.asList(
-                new LatLng(37.5640984, 126.9712268),
-                new LatLng(37.5651279, 126.9767904),
-                new LatLng(37.5625365, 126.9832241),
-                new LatLng(37.5585305, 126.9809297),
-                new LatLng(37.5590777, 126.974617)
-        ));
-        polygon.setMap(naverMap);
+//        PolygonOverlay polygon = new PolygonOverlay();
+//        polygon.setCoords(Arrays.asList(
+//                new LatLng(37.5640984, 126.9712268),
+//                new LatLng(37.5651279, 126.9767904),
+//                new LatLng(37.5625365, 126.9832241),
+//                new LatLng(37.5585305, 126.9809297),
+//                new LatLng(37.5590777, 126.974617)
+//        ));
+//        polygon.setMap(naverMap);
 //
 //        //polygon.setMap(null); //폴리곤 오버레이를 지도에서 제거
 //
@@ -309,7 +311,15 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         //polygon.setColor(Color.BLUE); //폴리곤 오버레이의 면색상 지정
 
-        polygon.setOutlineWidth(5); //폴리곤 오버레이 테두리 두께 5픽셀 지정
-        polygon.setOutlineColor(Color.GREEN); // 폴리곤 오버레이 테두리 색상 지정
+//        polygon.setOutlineWidth(5); //폴리곤 오버레이 테두리 두께 5픽셀 지정
+//        polygon.setOutlineColor(Color.GREEN); // 폴리곤 오버레이 테두리 색상 지정
+
+
+        //서클 오버레이 객체를 지도에 추가
+        circle.setCenter(coord);
+        circle.setRadius(500);
+        circle.setMap(naverMap);
+
+        circle.setMap(null); //서클 오버레이 제거
     }
 }
