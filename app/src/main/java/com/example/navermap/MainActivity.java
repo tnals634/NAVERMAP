@@ -6,6 +6,7 @@ import androidx.annotation.UiThread;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 
+import android.graphics.Color;
 import android.graphics.PointF;
 import android.os.Bundle;
 import android.view.View;
@@ -24,6 +25,7 @@ import com.naver.maps.map.overlay.LocationOverlay;
 import com.naver.maps.map.overlay.Marker;
 import com.naver.maps.map.overlay.OverlayImage;
 import com.naver.maps.map.util.FusedLocationSource;
+import com.naver.maps.map.util.MarkerIcons;
 
 import java.nio.channels.AsynchronousFileChannel;
 
@@ -131,6 +133,8 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         LocationOverlay locationOverlay = naverMap.getLocationOverlay();
 
         marker.setPosition(coord);
+        marker.setIcon(MarkerIcons.BLACK);
+        marker.setIconTintColor(Color.RED);
         marker.setMap(naverMap);
     }
 }
