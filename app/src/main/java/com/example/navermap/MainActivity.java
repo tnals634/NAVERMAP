@@ -33,7 +33,9 @@ import com.naver.maps.map.util.FusedLocationSource;
 import com.naver.maps.map.util.MarkerIcons;
 
 import java.nio.channels.AsynchronousFileChannel;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements OnMapReadyCallback {
@@ -245,7 +247,21 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                 coord
         )); // 폴리라인 오버레이 객체 생성
 
-        polyline.setMap(naverMap); //생성한 폴리라인 오버레이 지도에 추가
-        polyline.setMap(null); //오버레이를 지도에서 제거
+//        polyline.setMap(naverMap); //생성한 폴리라인 오버레이 지도에 추가
+//        polyline.setMap(null); //오버레이를 지도에서 제거
+
+
+        List<LatLng> coords = new ArrayList<>();
+        Collections.addAll(coords,
+                new LatLng(35.9448724,126.6818884),
+                new LatLng(35.943657,126.681690),
+                coord
+        );
+        polyline.setCoords(coords);
+
+        coords.set(0,new LatLng(35.944723,126.679920)); //아직 반영x
+        polyline.setCoords(coords);//반영됨
+        polyline.setMap(naverMap);
+
     }
 }
