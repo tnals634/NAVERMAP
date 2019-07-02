@@ -141,7 +141,8 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         //marker.setAngle(90); // 각도 조정
         //marker.setFlat(true); // 눕힘
         //marker.setIconPerspectiveEnabled(true); //원근 효과
-        marker.setCaptionText("Hello");
+        marker.setCaptionText("아주아주아주아주아주 아주아주아주 긴 캡션"); //캡션 택스트 설정
+        marker.setCaptionRequestedWidth(200); // 텍스트 줄바꿈
         marker.setMap(naverMap);
 
 
