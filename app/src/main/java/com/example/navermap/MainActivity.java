@@ -85,9 +85,9 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                 //.tiltGesturesEnabled(false); //초깃값 지정시 현위치 버튼 활성화, 틸트 제스처 비활성화
 
         
-        naverMap.setOnMapClickListener((pointF, latLng) ->
-                Toast.makeText(this,latLng.latitude+", "+ latLng.longitude,
-                        Toast.LENGTH_SHORT).show()); //클릭시 좌표 뜸
+//        naverMap.setOnMapClickListener((pointF, latLng) ->
+//                Toast.makeText(this,latLng.latitude+", "+ latLng.longitude,
+//                        Toast.LENGTH_SHORT).show()); //클릭시 좌표 뜸
 
 //        naverMap.setOnMapLongClickListener((pointF, latLng) ->
 //                Toast.makeText(this,latLng.latitude + ", " +latLng.longitude,
@@ -133,10 +133,11 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         LocationOverlay locationOverlay = naverMap.getLocationOverlay();
 
         marker.setPosition(coord);
-        marker.setIcon(MarkerIcons.BLACK);
-        marker.setIcon(OverlayImage.fromResource(R.drawable.marker_icon));
+//        marker.setIcon(MarkerIcons.BLACK);
+//        marker.setIcon(OverlayImage.fromResource(R.drawable.marker_icon));
         marker.setWidth(60);
         marker.setHeight(80);
+        marker.setAngle(90);
         marker.setMap(naverMap);
 
     }
