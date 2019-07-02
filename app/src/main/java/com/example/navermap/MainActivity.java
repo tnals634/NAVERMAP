@@ -8,6 +8,7 @@ import androidx.fragment.app.FragmentManager;
 
 import android.graphics.PointF;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Toast;
 
 import com.naver.maps.geometry.LatLng;
@@ -18,12 +19,15 @@ import com.naver.maps.map.NaverMap;
 import com.naver.maps.map.NaverMapOptions;
 import com.naver.maps.map.OnMapReadyCallback;
 import com.naver.maps.map.UiSettings;
+import com.naver.maps.map.overlay.LocationOverlay;
+import com.naver.maps.map.overlay.OverlayImage;
 import com.naver.maps.map.util.FusedLocationSource;
 
 public class MainActivity extends AppCompatActivity implements OnMapReadyCallback {
 
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1000;
     private FusedLocationSource locationSource;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,6 +77,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                 //.locationButtonEnabled(true)
                 //.tiltGesturesEnabled(false); //초깃값 지정시 현위치 버튼 활성화, 틸트 제스처 비활성화
 
+        
 //        naverMap.setOnMapClickListener((pointF, latLng) ->
 //                Toast.makeText(this,latLng.latitude+", "+ latLng.longitude,
 //                        Toast.LENGTH_SHORT).show()); //클릭시 좌표 뜸
@@ -81,17 +86,24 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 //                Toast.makeText(this,latLng.latitude + ", " +latLng.longitude,
 //                        Toast.LENGTH_SHORT).show()); //롱클릭시 좌표 뜸
 
-        naverMap.setOnMapClickListener((pointF, latLng) ->
-                Toast.makeText(this,"지도 클릭", Toast.LENGTH_SHORT).show());
+        
+//        naverMap.setOnMapClickListener((pointF, latLng) ->
+//                Toast.makeText(this,"지도 클릭", Toast.LENGTH_SHORT).show());
+//
+//        naverMap.setOnSymbolClickListener(symbol -> {
+//            if("군산대학교".equals(symbol.getCaption())){
+//                Toast.makeText(this,"군산대학교 클릭",Toast.LENGTH_SHORT).show();
+//                return true;
+//            }
+//            return false;
+//        });
 
-        naverMap.setOnSymbolClickListener(symbol -> {
-            if("군산대학교".equals(symbol.getCaption())){
-                Toast.makeText(this,"군산대학교 클릭",Toast.LENGTH_SHORT).show();
-                return true;
-            }
-            return false;
+
+        naverMap.setOnMapDoubleTapListener((pointF, latLng) -> {
+            Toast.makeText(this,latLng.latitude + ", " + latLng.longitude,
+                    Toast.LENGTH_SHORT).show();
+            return true;
         });
-
 
     }
 }
