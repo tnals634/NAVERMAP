@@ -67,7 +67,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     public void onMapReady(@NonNull NaverMap naverMap) {
         LatLng coord = new LatLng(35.9423408, 126.6832079);
         Marker marker = new Marker();
-        Marker marker1 = new Marker();
+        //Marker marker1 = new Marker();
         CameraPosition cameraPosition =
                 new CameraPosition(coord, 16,45,0);
         naverMap.setCameraPosition(cameraPosition);
@@ -120,31 +120,33 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 //        }); //두손가락 탭 시 경도와 위도 표출
 
 
-//        naverMap.setLocationSource(locationSource);
+//        naverMap.setLocationSource(locationSource); //해당 위치
 //
-//        naverMap.setLocationTrackingMode(LocationTrackingMode.None);
+//        naverMap.setLocationTrackingMode(LocationTrackingMode.None); //해당 위치 아이콘 설정
 //
 //
 //        naverMap.addOnLocationChangeListener(location -> Toast.makeText(this,
 //                location.getLatitude() + ", " + location.getLatitude(),
-//                Toast.LENGTH_SHORT).show());
+//                Toast.LENGTH_SHORT).show()); //위치 위도 경도 뜸
 
 
         LocationOverlay locationOverlay = naverMap.getLocationOverlay();
 
         marker.setPosition(coord);
-//        marker.setIcon(MarkerIcons.BLACK);
-//        marker.setIcon(OverlayImage.fromResource(R.drawable.marker_icon));
-        //marker.setWidth(Marker.SIZE_AUTO);
-        //marker.setHeight(Marker.SIZE_AUTO);
-        //marker.setAngle(90);
-        //marker.setFlat(true);
-        marker.setIconPerspectiveEnabled(true);
+//        marker.setIcon(MarkerIcons.BLACK); //해당 색으로 지정
+//        marker.setIcon(Color.RED); //해당 색으로 바꿈
+//        marker.setIcon(OverlayImage.fromResource(R.drawable.marker_icon)); //내가 다운받은 아이콘으로 설정
+        //marker.setWidth(Marker.SIZE_AUTO); //가로 사이즈 조정
+        //marker.setHeight(Marker.SIZE_AUTO); //세로 사이즈 조정
+        //marker.setAngle(90); // 각도 조정
+        //marker.setFlat(true); // 눕힘
+        //marker.setIconPerspectiveEnabled(true); //원근 효과
+        marker.setCaptionText("Hello");
         marker.setMap(naverMap);
 
 
-        marker1.setPosition(new LatLng(35.9448724,126.6818884));
-        marker1.setIconPerspectiveEnabled(true);
-        marker1.setMap(naverMap);
+//        marker1.setPosition(new LatLng(35.9448724,126.6818884));
+//        marker1.setIconPerspectiveEnabled(true);
+//        marker1.setMap(naverMap); //원근 효과시 두번째 마커
     }
 }
