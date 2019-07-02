@@ -23,6 +23,7 @@ import com.naver.maps.map.NaverMapOptions;
 import com.naver.maps.map.OnMapReadyCallback;
 import com.naver.maps.map.UiSettings;
 import com.naver.maps.map.overlay.Align;
+import com.naver.maps.map.overlay.ArrowheadPathOverlay;
 import com.naver.maps.map.overlay.CircleOverlay;
 import com.naver.maps.map.overlay.InfoWindow;
 import com.naver.maps.map.overlay.LocationOverlay;
@@ -86,6 +87,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         CircleOverlay circle = new CircleOverlay();
         PathOverlay path = new PathOverlay();
         MultipartPathOverlay multipartPath = new MultipartPathOverlay();
+        ArrowheadPathOverlay arrowheadPath = new ArrowheadPathOverlay();
 
 //        CameraPosition cameraPosition =
 //                new CameraPosition(coord, 16,45,0);
@@ -358,28 +360,28 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 //        path.setOutlineWidth(5); // 경로 오버레이 테두리 두께 지정
 
 
-        //멀티파트 경로선 오버레이 생성 및 지도에 추가/제거
-        multipartPath.setCoordParts(Arrays.asList(
-                Arrays.asList(
-                        new LatLng(37.5744287, 126.982625),
-                        new LatLng(37.57152, 126.97714),
-                        new LatLng(37.56607, 126.98268)
-                ),
-                Arrays.asList(
-                        new LatLng(37.56607, 126.98268),
-                        new LatLng(37.56445, 126.97707),
-                        new LatLng(37.55855, 126.97822)
-                )
-        ));
-
-        multipartPath.setColorParts(Arrays.asList(
-                new MultipartPathOverlay.ColorPart(
-                        Color.RED, Color.WHITE, Color.GRAY, Color.LTGRAY),
-                new MultipartPathOverlay.ColorPart(
-                        Color.GREEN, Color.WHITE, Color.DKGRAY, Color.LTGRAY)
-        ));
-
-        multipartPath.setMap(naverMap);
+//        //멀티파트 경로선 오버레이 생성 및 지도에 추가/제거
+//        multipartPath.setCoordParts(Arrays.asList(
+//                Arrays.asList(
+//                        new LatLng(37.5744287, 126.982625),
+//                        new LatLng(37.57152, 126.97714),
+//                        new LatLng(37.56607, 126.98268)
+//                ),
+//                Arrays.asList(
+//                        new LatLng(37.56607, 126.98268),
+//                        new LatLng(37.56445, 126.97707),
+//                        new LatLng(37.55855, 126.97822)
+//                )
+//        ));
+//
+//        multipartPath.setColorParts(Arrays.asList(
+//                new MultipartPathOverlay.ColorPart(
+//                        Color.RED, Color.WHITE, Color.GRAY, Color.LTGRAY),
+//                new MultipartPathOverlay.ColorPart(
+//                        Color.GREEN, Color.WHITE, Color.DKGRAY, Color.LTGRAY)
+//        ));
+//
+//        multipartPath.setMap(naverMap);
 
         //multipartPath.setMap(null);//경로선 오버레이 지도에서 제거
 
@@ -404,19 +406,29 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 //        coordParts.get(0).set(0, new LatLng(37.5734571, 126.975335));// 아직 반영되지 않음
 //        multipartPath.setCoordParts(coordParts);// 반영됨
 
-        //색상 파트
-        MultipartPathOverlay.ColorPart colorPart = new MultipartPathOverlay.ColorPart(
-                Color.RED,   // 지나갈 경로선의 선 색상을 빨간색으로 지정
-                Color.WHITE, // 지나갈 경로선의 테두리 색상을 흰색으로 지정
-                Color.GRAY,  // 지나온 경로선의 선 색상을 회색으로 지정
-                Color.LTGRAY // 지나온 경로선의 테두리 색상을 밝은 회색으로 지정
-        );
+//        //색상 파트
+//        MultipartPathOverlay.ColorPart colorPart = new MultipartPathOverlay.ColorPart(
+//                Color.RED,   // 지나갈 경로선의 선 색상을 빨간색으로 지정
+//                Color.WHITE, // 지나갈 경로선의 테두리 색상을 흰색으로 지정
+//                Color.GRAY,  // 지나온 경로선의 선 색상을 회색으로 지정
+//                Color.LTGRAY // 지나온 경로선의 테두리 색상을 밝은 회색으로 지정
+//        );
+//
+//        multipartPath.setColorParts(Arrays.asList(
+//                new MultipartPathOverlay.ColorPart(
+//                        Color.RED, Color.WHITE, Color.GRAY, Color.LTGRAY),
+//                new MultipartPathOverlay.ColorPart(
+//                        Color.GREEN, Color.WHITE, Color.DKGRAY, Color.LTGRAY)
+//        ));
 
-        multipartPath.setColorParts(Arrays.asList(
-                new MultipartPathOverlay.ColorPart(
-                        Color.RED, Color.WHITE, Color.GRAY, Color.LTGRAY),
-                new MultipartPathOverlay.ColorPart(
-                        Color.GREEN, Color.WHITE, Color.DKGRAY, Color.LTGRAY)
+        //화살표 오버레이 생성 및 지도에 추가/제거
+        arrowheadPath.setCoords(Arrays.asList(
+                new LatLng(37.568003, 126.9772503),
+                new LatLng(37.5701573, 126.9772503),
+                new LatLng(37.5701573, 126.9793745)
         ));
+        arrowheadPath.setMap(naverMap);
+
+        //arrowheadPath.setMap(null); //화살표 오버레이 지도에서 제거
     }
 }
