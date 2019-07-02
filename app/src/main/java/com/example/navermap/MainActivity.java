@@ -80,18 +80,20 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     @Override
     public void onMapReady(@NonNull NaverMap naverMap) {
         LatLng coord = new LatLng(35.9423408, 126.6832079);
-        Marker marker = new Marker();
         Marker marker1 = new Marker();
+        Marker marker2 = new Marker();
         InfoWindow infoWindow = new InfoWindow();
         PolylineOverlay polyline = new PolylineOverlay();
         CircleOverlay circle = new CircleOverlay();
         PathOverlay path = new PathOverlay();
         MultipartPathOverlay multipartPath = new MultipartPathOverlay();
         ArrowheadPathOverlay arrowheadPath = new ArrowheadPathOverlay();
+        Marker marker3 = new Marker();
+        Marker marker4 = new Marker();
 
-//        CameraPosition cameraPosition =
-//                new CameraPosition(coord, 16,45,0);
-//        naverMap.setCameraPosition(cameraPosition);
+        CameraPosition cameraPosition =
+                new CameraPosition(new LatLng(35.969856,126.936638), 9,45,0);
+        naverMap.setCameraPosition(cameraPosition);
         //naverMap.setMapType(NaverMap.MapType.Hybrid);
 
         //UiSettings uiSettings = naverMap.getUiSettings();
@@ -421,13 +423,13 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 //                        Color.GREEN, Color.WHITE, Color.DKGRAY, Color.LTGRAY)
 //        ));
 
-        //화살표 오버레이 생성 및 지도에 추가/제거
-        arrowheadPath.setCoords(Arrays.asList(
-                new LatLng(37.568003, 126.9772503),
-                new LatLng(37.5701573, 126.9772503),
-                new LatLng(37.5701573, 126.9793745)
-        ));
-        arrowheadPath.setMap(naverMap);
+//        //화살표 오버레이 생성 및 지도에 추가/제거
+//        arrowheadPath.setCoords(Arrays.asList(
+//                new LatLng(37.568003, 126.9772503),
+//                new LatLng(37.5701573, 126.9772503),
+//                new LatLng(37.5701573, 126.9793745)
+//        ));
+//        arrowheadPath.setMap(naverMap);
 
         //arrowheadPath.setMap(null); //화살표 오버레이 지도에서 제거
 
@@ -443,9 +445,40 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 //        coords.set(0, new LatLng(37.5734571, 126.975335));// 아직 반영되지 않음
 //        arrowheadPath.setCoords(coords);// 반영됨
 
-        arrowheadPath.setWidth(20); // 화살표 오버레이의 두께 지정
-        arrowheadPath.setHeadSizeRatio(4); //화살표 오버레이의 머리크기를 두께의 4배로 지정
-        arrowheadPath.setColor(Color.GREEN); // 화살표 오버레이의 색상 지정
-        arrowheadPath.setOutlineColor(Color.BLUE); // 화살표 오버레이의 테두리 색상 지정
+//        arrowheadPath.setWidth(20); // 화살표 오버레이의 두께 지정
+//        arrowheadPath.setHeadSizeRatio(4); //화살표 오버레이의 머리크기를 두께의 4배로 지정
+//        arrowheadPath.setColor(Color.GREEN); // 화살표 오버레이의 색상 지정
+//        arrowheadPath.setOutlineColor(Color.BLUE); // 화살표 오버레이의 테두리 색상 지정
+
+
+        marker1.setPosition(coord); //군산대
+        marker1.setIconPerspectiveEnabled(true);
+        marker1.setIcon(MarkerIcons.BLACK); //해당 색으로 지정
+        marker1.setWidth(50);
+        marker1.setHeight(80);
+        marker1.setMap(naverMap);
+
+        marker2.setPosition(new LatLng(35.9673799,126.7366249)); //군산시청
+        marker2.setIconPerspectiveEnabled(true);
+        marker2.setIcon(MarkerIcons.BLACK); //해당 색으로 지정
+        marker2.setWidth(50);
+        marker2.setHeight(80);
+        marker2.setMap(naverMap);
+
+        marker3.setPosition(new LatLng(35.969439,126.957327)); //원광대
+        marker3.setIconPerspectiveEnabled(true);
+        marker3.setIcon(MarkerIcons.BLACK); //해당 색으로 지정
+        marker3.setWidth(50);
+        marker3.setHeight(80);
+        marker3.setMap(naverMap);
+
+        marker4.setPosition(new LatLng(35.8441799,127.1289129)); //전북대
+        marker4.setIconPerspectiveEnabled(true);
+        marker4.setIcon(MarkerIcons.BLACK); //해당 색으로 지정
+        marker4.setWidth(50);
+        marker4.setHeight(80);
+        marker4.setMap(naverMap);
+
+
     }
 }
