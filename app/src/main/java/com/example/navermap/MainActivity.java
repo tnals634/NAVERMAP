@@ -383,6 +383,25 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         //multipartPath.setMap(null);//경로선 오버레이 지도에서 제거
 
+        //경로선 오버레이의 좌표열 중 일부 변경
+        List<LatLng> coordPart1 = new ArrayList<>();
+        Collections.addAll(coordPart1,
+                new LatLng(37.5744287, 126.982625),
+                new LatLng(37.57152, 126.97714),
+                new LatLng(37.56607, 126.98268)
+        );
 
+        List<LatLng> coordPart2 = new ArrayList<>();
+        Collections.addAll(coordPart2,
+                new LatLng(37.56607, 126.98268),
+                new LatLng(37.56445, 126.97707),
+                new LatLng(37.55855, 126.97822)
+        );
+
+        List<List<LatLng>> coordParts = Arrays.asList(coordPart1, coordPart2);
+        multipartPath.setCoordParts(coordParts);
+
+        coordParts.get(0).set(0, new LatLng(37.5734571, 126.975335));// 아직 반영되지 않음
+        multipartPath.setCoordParts(coordParts);// 반영됨
     }
 }
