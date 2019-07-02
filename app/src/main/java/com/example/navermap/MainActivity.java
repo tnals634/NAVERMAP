@@ -10,6 +10,7 @@ import android.graphics.Color;
 import android.graphics.PointF;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ListAdapter;
 import android.widget.Toast;
 
 import com.naver.maps.geometry.LatLng;
@@ -27,10 +28,12 @@ import com.naver.maps.map.overlay.LocationOverlay;
 import com.naver.maps.map.overlay.Marker;
 import com.naver.maps.map.overlay.Overlay;
 import com.naver.maps.map.overlay.OverlayImage;
+import com.naver.maps.map.overlay.PolylineOverlay;
 import com.naver.maps.map.util.FusedLocationSource;
 import com.naver.maps.map.util.MarkerIcons;
 
 import java.nio.channels.AsynchronousFileChannel;
+import java.util.Arrays;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements OnMapReadyCallback {
@@ -73,6 +76,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         Marker marker = new Marker();
         Marker marker1 = new Marker();
         InfoWindow infoWindow = new InfoWindow();
+        PolylineOverlay polyline = new PolylineOverlay();
 
         CameraPosition cameraPosition =
                 new CameraPosition(coord, 16,45,0);
@@ -137,16 +141,16 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
 
         LocationOverlay locationOverlay = naverMap.getLocationOverlay();
-
-        marker.setPosition(coord);
-        marker.setIcon(MarkerIcons.BLACK); //해당 색으로 지정
+//
+//        marker.setPosition(coord);
+//        marker.setIcon(MarkerIcons.BLACK); //해당 색으로 지정
 //        marker.setIcon(Color.RED); //해당 색으로 바꿈
 //        marker.setIcon(OverlayImage.fromResource(R.drawable.marker_icon)); //내가 다운받은 아이콘으로 설정
-        marker.setWidth(Marker.SIZE_AUTO); //가로 사이즈 조정
-        marker.setHeight(Marker.SIZE_AUTO); //세로 사이즈 조정
+//        marker.setWidth(Marker.SIZE_AUTO); //가로 사이즈 조정
+//        marker.setHeight(Marker.SIZE_AUTO); //세로 사이즈 조정
         //marker.setAngle(90); // 각도 조정
         //marker.setFlat(true); // 눕힘
-        marker.setIconPerspectiveEnabled(true); //원근 효과
+//        marker.setIconPerspectiveEnabled(true); //원근 효과
 
         //marker.setCaptionText("주 캡션"); //캡션 택스트 설정
         //marker.setCaptionRequestedWidth(200); // 텍스트 줄바꿈
@@ -163,12 +167,12 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
 //        marker.setAlpha(0.5f); //marker 불투명도
 
-        marker.setMap(naverMap);
+//        marker.setMap(naverMap);
 
 
-        marker1.setPosition(new LatLng(35.9448724,126.6818884));
-        marker1.setIconPerspectiveEnabled(true);
-        marker1.setMap(naverMap); //원근 효과시 두번째 마커
+//        marker1.setPosition(new LatLng(35.9448724,126.6818884));
+//        marker1.setIconPerspectiveEnabled(true);
+//        marker1.setMap(naverMap); //원근 효과시 두번째 마커
 
 //        infoWindow.setAdapter(new InfoWindow.DefaultTextAdapter(this) {
 //            @NonNull
@@ -212,27 +216,36 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 //
 //        marker.setOnClickListener(listener);
 
-        marker.setTag("마커1");
-        marker.setOnClickListener(overlay -> {
-            //마커를 클릭할 때 정보창을 엶
-            infoWindow.open(marker);
-            return true;
-        });
+//        marker.setTag("마커1");
+//        marker.setOnClickListener(overlay -> {
+//            //마커를 클릭할 때 정보창을 엶
+//            infoWindow.open(marker);
+//            return true;
+//        });
+//
+//        marker1.setTag("마커2");
+//        marker1.setOnClickListener(overlay -> {
+//            //마커를 클릭할 때 정보창을 엶
+//            infoWindow.open(marker1);
+//            return true;
+//        });
+//
+//        infoWindow.setAdapter(new InfoWindow.DefaultTextAdapter( this) {
+//            @NonNull
+//            @Override
+//            public CharSequence getText(@NonNull InfoWindow infoWindow) {
+//                //정보 창이 열린 마커의 tag를 텍스트로 노출하도록 반환
+//                return (CharSequence)infoWindow.getMarker().getTag();
+//            }
+//        });
 
-        marker1.setTag("마커2");
-        marker1.setOnClickListener(overlay -> {
-            //마커를 클릭할 때 정보창을 엶
-            infoWindow.open(marker1);
-            return true;
-        });
+        polyline.setCoords(Arrays.asList(
+                new LatLng(35.9448724,126.6818884),
+                new LatLng(35.943657,126.681690),
+                coord
+        )); // 폴리라인 오버레이 객체 생성
 
-        infoWindow.setAdapter(new InfoWindow.DefaultTextAdapter( this) {
-            @NonNull
-            @Override
-            public CharSequence getText(@NonNull InfoWindow infoWindow) {
-                //정보 창이 열린 마커의 tag를 텍스트로 노출하도록 반환
-                return (CharSequence)infoWindow.getMarker().getTag();
-            }
-        });
+        polyline.setMap(naverMap); //생성한 폴리라인 오버레이 지도에 추가
+
     }
 }
