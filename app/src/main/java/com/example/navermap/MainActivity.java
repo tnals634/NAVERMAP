@@ -77,9 +77,20 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 //                Toast.makeText(this,latLng.latitude+", "+ latLng.longitude,
 //                        Toast.LENGTH_SHORT).show()); //클릭시 좌표 뜸
 
-        naverMap.setOnMapLongClickListener((pointF, latLng) ->
-                Toast.makeText(this,latLng.latitude + ", " +latLng.longitude,
-                        Toast.LENGTH_SHORT).show()); //롱클릭시 좌표 뜸
+//        naverMap.setOnMapLongClickListener((pointF, latLng) ->
+//                Toast.makeText(this,latLng.latitude + ", " +latLng.longitude,
+//                        Toast.LENGTH_SHORT).show()); //롱클릭시 좌표 뜸
+
+        naverMap.setOnMapClickListener((pointF, latLng) ->
+                Toast.makeText(this,"지도 클릭", Toast.LENGTH_SHORT).show());
+
+        naverMap.setOnSymbolClickListener(symbol -> {
+            if("군산대학교".equals(symbol.getCaption())){
+                Toast.makeText(this,"군산대학교 클릭",Toast.LENGTH_SHORT).show();
+                return true;
+            }
+            return false;
+        });
 
 
     }
