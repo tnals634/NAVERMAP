@@ -265,5 +265,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         polyline.setWidth(10); //두께를 10픽셀로 지정
 
+        polyline.setColor(Color.GREEN); // 녹색으로 지정
+
     }
 }
