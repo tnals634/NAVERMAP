@@ -263,5 +263,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         polyline.setCoords(coords);//반영됨
         polyline.setMap(naverMap);
 
+        polyline.setWidth(10); //두께를 10픽셀로 지정
+
     }
 }
