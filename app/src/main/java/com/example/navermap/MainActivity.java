@@ -307,6 +307,8 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 //                new LatLng(37.5628377, 126.976066)
 //        )));
 
-        polygon.setColor(Color.BLUE); //폴리곤 오버레이의 면색상 지정
+        //polygon.setColor(Color.BLUE); //폴리곤 오버레이의 면색상 지정
+
+        polygon.setOutlineWidth(5); //폴리곤 오버레이 테두리 두께 5픽셀 지정
     }
 }
