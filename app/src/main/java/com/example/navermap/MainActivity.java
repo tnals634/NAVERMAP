@@ -22,6 +22,7 @@ import com.naver.maps.map.NaverMapOptions;
 import com.naver.maps.map.OnMapReadyCallback;
 import com.naver.maps.map.UiSettings;
 import com.naver.maps.map.overlay.Align;
+import com.naver.maps.map.overlay.InfoWindow;
 import com.naver.maps.map.overlay.LocationOverlay;
 import com.naver.maps.map.overlay.Marker;
 import com.naver.maps.map.overlay.OverlayImage;
@@ -29,6 +30,7 @@ import com.naver.maps.map.util.FusedLocationSource;
 import com.naver.maps.map.util.MarkerIcons;
 
 import java.nio.channels.AsynchronousFileChannel;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements OnMapReadyCallback {
 
@@ -69,6 +71,8 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         LatLng coord = new LatLng(35.9423408, 126.6832079);
         Marker marker = new Marker();
         //Marker marker1 = new Marker();
+        InfoWindow infoWindow = new InfoWindow();
+
         CameraPosition cameraPosition =
                 new CameraPosition(coord, 16,45,0);
         naverMap.setCameraPosition(cameraPosition);
@@ -133,7 +137,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         LocationOverlay locationOverlay = naverMap.getLocationOverlay();
 
-        marker.setPosition(coord);
+//        marker.setPosition(coord);
 //        marker.setIcon(MarkerIcons.BLACK); //해당 색으로 지정
 //        marker.setIcon(Color.RED); //해당 색으로 바꿈
 //        marker.setIcon(OverlayImage.fromResource(R.drawable.marker_icon)); //내가 다운받은 아이콘으로 설정
@@ -156,13 +160,29 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 //        marker.setSubCaptionHaloColor(Color.rgb(200,255,200));
 //        marker.setSubCaptionTextSize(10);
 
-        marker.setAlpha(0.5f); //marker 불투명도
+//        marker.setAlpha(0.5f); //marker 불투명도
 
-        marker.setMap(naverMap);
+//        marker.setMap(naverMap);
 
 
 //        marker1.setPosition(new LatLng(35.9448724,126.6818884));
 //        marker1.setIconPerspectiveEnabled(true);
 //        marker1.setMap(naverMap); //원근 효과시 두번째 마커
+
+        infoWindow.setAdapter(new InfoWindow.DefaultTextAdapter(this) {
+            @NonNull
+            @Override
+            public CharSequence getText(@NonNull InfoWindow infoWindow) {
+                return "정보 창 내용";
+            }
+        });
+
+        infoWindow.open(marker);
+
+        //정보 창을 군산대학교 좌표에 열음
+        infoWindow.setPosition(coord);
+        infoWindow.open(naverMap);
+
+        infoWindow.close(); // 정보 창을 닫음
     }
 }
