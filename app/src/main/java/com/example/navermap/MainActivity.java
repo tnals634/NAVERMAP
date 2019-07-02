@@ -67,7 +67,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     public void onMapReady(@NonNull NaverMap naverMap) {
         LatLng coord = new LatLng(35.9423408, 126.6832079);
         Marker marker = new Marker();
-
+        Marker marker1 = new Marker();
         CameraPosition cameraPosition =
                 new CameraPosition(coord, 16,45,0);
         naverMap.setCameraPosition(cameraPosition);
@@ -135,11 +135,16 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         marker.setPosition(coord);
 //        marker.setIcon(MarkerIcons.BLACK);
 //        marker.setIcon(OverlayImage.fromResource(R.drawable.marker_icon));
-        marker.setWidth(60);
-        marker.setHeight(80);
+        //marker.setWidth(Marker.SIZE_AUTO);
+        //marker.setHeight(Marker.SIZE_AUTO);
         //marker.setAngle(90);
-        marker.setFlat(true);
+        //marker.setFlat(true);
+        marker.setIconPerspectiveEnabled(true);
         marker.setMap(naverMap);
 
+
+        marker1.setPosition(new LatLng(35.9448724,126.6818884));
+        marker1.setIconPerspectiveEnabled(true);
+        marker1.setMap(naverMap);
     }
 }
