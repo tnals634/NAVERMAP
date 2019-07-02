@@ -71,7 +71,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     public void onMapReady(@NonNull NaverMap naverMap) {
         LatLng coord = new LatLng(35.9423408, 126.6832079);
         Marker marker = new Marker();
-        //Marker marker1 = new Marker();
+        Marker marker1 = new Marker();
         InfoWindow infoWindow = new InfoWindow();
 
         CameraPosition cameraPosition =
@@ -166,50 +166,73 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         marker.setMap(naverMap);
 
 
-//        marker1.setPosition(new LatLng(35.9448724,126.6818884));
-//        marker1.setIconPerspectiveEnabled(true);
-//        marker1.setMap(naverMap); //원근 효과시 두번째 마커
+        marker1.setPosition(new LatLng(35.9448724,126.6818884));
+        marker1.setIconPerspectiveEnabled(true);
+        marker1.setMap(naverMap); //원근 효과시 두번째 마커
 
-        infoWindow.setAdapter(new InfoWindow.DefaultTextAdapter(this) {
-            @NonNull
-            @Override
-            public CharSequence getText(@NonNull InfoWindow infoWindow) {
-                return "정보 창 내용";
-            }
-        });
-
-        infoWindow.open(marker);
+//        infoWindow.setAdapter(new InfoWindow.DefaultTextAdapter(this) {
+//            @NonNull
+//            @Override
+//            public CharSequence getText(@NonNull InfoWindow infoWindow) {
+//                return "정보 창 내용";
+//            }
+//        });
+//
+//        infoWindow.open(marker);
 
         //정보 창을 군산대학교 좌표에 열음
-        infoWindow.setPosition(coord);
-        infoWindow.open(naverMap);
+//        infoWindow.setPosition(coord);
+//        infoWindow.open(naverMap);
 
         //infoWindow.close(); // 정보 창을 닫음
 //
 //        infoWindow.setMap(naverMap); //map 속성을 이용해 정보창을 열음
 //        infoWindow.setMap(null);//map 속성을 이용해 정보창을 닫음
 
-        //지도를 클릭하면 정보 창을 닫음
-        naverMap.setOnMapClickListener((lanLng, point)->{
-            infoWindow.close();
+//        //지도를 클릭하면 정보 창을 닫음
+//        naverMap.setOnMapClickListener((lanLng, point)->{
+//            infoWindow.close();
+//        });
+
+//        //마커를 클릭하면
+//        Overlay.OnClickListener listener = overlay -> {
+//
+//            if(marker.getInfoWindow() == null)
+//            {
+//                //현재 마커에 정보 창이 열려있지 않을 경우 엶
+//                infoWindow.open(marker);
+//            }
+//            else
+//            {
+//                //이미 현재 마커에 정보 창이 열려있을 경우 닫음
+//                infoWindow.close();
+//            }
+//            return true;
+//        };
+//
+//        marker.setOnClickListener(listener);
+
+        marker.setTag("마커1");
+        marker.setOnClickListener(overlay -> {
+            //마커를 클릭할 때 정보창을 엶
+            infoWindow.open(marker);
+            return true;
         });
 
-        //마커를 클릭하면
-        Overlay.OnClickListener listener = overlay -> {
-
-            if(marker.getInfoWindow() == null)
-            {
-                //현재 마커에 정보 창이 열려있지 않을 경우 엶
-                infoWindow.open(marker);
-            }
-            else
-            {
-                //이미 현재 마커에 정보 창이 열려있을 경우 닫음
-                infoWindow.close();
-            }
+        marker1.setTag("마커2");
+        marker1.setOnClickListener(overlay -> {
+            //마커를 클릭할 때 정보창을 엶
+            infoWindow.open(marker1);
             return true;
-        };
+        });
 
-        marker.setOnClickListener(listener);
+        infoWindow.setAdapter(new InfoWindow.DefaultTextAdapter( this) {
+            @NonNull
+            @Override
+            public CharSequence getText(@NonNull InfoWindow infoWindow) {
+                //정보 창이 열린 마커의 tag를 텍스트로 노출하도록 반환
+                return (CharSequence)infoWindow.getMarker().getTag();
+            }
+        });
     }
 }
