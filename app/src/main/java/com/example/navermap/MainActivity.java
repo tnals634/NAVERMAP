@@ -28,6 +28,7 @@ import com.naver.maps.map.overlay.LocationOverlay;
 import com.naver.maps.map.overlay.Marker;
 import com.naver.maps.map.overlay.Overlay;
 import com.naver.maps.map.overlay.OverlayImage;
+import com.naver.maps.map.overlay.PolygonOverlay;
 import com.naver.maps.map.overlay.PolylineOverlay;
 import com.naver.maps.map.util.FusedLocationSource;
 import com.naver.maps.map.util.MarkerIcons;
@@ -80,9 +81,9 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         InfoWindow infoWindow = new InfoWindow();
         PolylineOverlay polyline = new PolylineOverlay();
 
-        CameraPosition cameraPosition =
-                new CameraPosition(coord, 16,45,0);
-        naverMap.setCameraPosition(cameraPosition);
+//        CameraPosition cameraPosition =
+//                new CameraPosition(coord, 16,45,0);
+//        naverMap.setCameraPosition(cameraPosition);
         //naverMap.setMapType(NaverMap.MapType.Hybrid);
 
         //UiSettings uiSettings = naverMap.getUiSettings();
@@ -241,31 +242,50 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 //            }
 //        });
 
-        polyline.setCoords(Arrays.asList(
-                new LatLng(35.9448724,126.6818884),
-                new LatLng(35.943657,126.681690),
-                coord
-        )); // 폴리라인 오버레이 객체 생성
+//        polyline.setCoords(Arrays.asList(
+//                new LatLng(35.9448724,126.6818884),
+//                new LatLng(35.943657,126.681690),
+//                coord
+//        )); // 폴리라인 오버레이 객체 생성
 
 //        polyline.setMap(naverMap); //생성한 폴리라인 오버레이 지도에 추가
 //        polyline.setMap(null); //오버레이를 지도에서 제거
 
 
-        List<LatLng> coords = new ArrayList<>();
-        Collections.addAll(coords,
-                new LatLng(35.9448724,126.6818884),
-                new LatLng(35.943657,126.681690),
-                coord
-        );
-        polyline.setCoords(coords);
+//        List<LatLng> coords = new ArrayList<>();
+//        Collections.addAll(coords,
+//                new LatLng(35.9448724,126.6818884),
+//                new LatLng(35.943657,126.681690),
+//                coord
+//        );
+//        polyline.setCoords(coords);
+//
+//        coords.set(0,new LatLng(35.944723,126.679920)); //아직 반영x
+//        polyline.setCoords(coords);//반영됨
+//        polyline.setMap(naverMap);
+//
+//        polyline.setWidth(10); //두께를 10픽셀로 지정
+//
+//        polyline.setColor(Color.GREEN); // 녹색으로 지정
+//
+//        polyline.setPattern(10,5); // 점선 패턴 (실선 10픽셀, 공백 5픽셀)
+//
+//        polyline.setCapType(PolylineOverlay.LineCap.Round); //오버레이 끝 지점 모양 지정
+//
+//        polyline.setJoinType(PolylineOverlay.LineJoin.Round); // 오버레이 연결점 모양 지정
 
-        coords.set(0,new LatLng(35.944723,126.679920)); //아직 반영x
-        polyline.setCoords(coords);//반영됨
-        polyline.setMap(naverMap);
 
-        polyline.setWidth(10); //두께를 10픽셀로 지정
+        //폴리곤 오버레이 객체 생성 / 지도에 추가
+        PolygonOverlay polygon = new PolygonOverlay();
+        polygon.setCoords(Arrays.asList(
+                new LatLng(37.5640984, 126.9712268),
+                new LatLng(37.5651279, 126.9767904),
+                new LatLng(37.5625365, 126.9832241),
+                new LatLng(37.5585305, 126.9809297),
+                new LatLng(37.5590777, 126.974617)
+        ));
+        polygon.setMap(naverMap);
 
-        polyline.setColor(Color.GREEN); // 녹색으로 지정
-
+        polygon.setMap(null); //폴리곤 오버레이를 지도에서 제거
     }
 }
