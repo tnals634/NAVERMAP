@@ -286,6 +286,19 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         ));
         polygon.setMap(naverMap);
 
-        polygon.setMap(null); //폴리곤 오버레이를 지도에서 제거
+        //polygon.setMap(null); //폴리곤 오버레이를 지도에서 제거
+
+        List<LatLng> coords = new ArrayList<>();
+        Collections.addAll(coords,
+                new LatLng(37.5640984, 126.9712268),
+                new LatLng(37.5651279, 126.9767904),
+                new LatLng(37.5625365, 126.9832241),
+                new LatLng(37.5585305, 126.9809297),
+                new LatLng(37.5590777, 126.974617)
+        );
+        polygon.setCoords(coords);
+
+        coords.set(0, new LatLng(37.5734571, 126.975335));// 아직 반영되지 않음
+        polygon.setCoords(coords);// 반영됨
     }
 }
