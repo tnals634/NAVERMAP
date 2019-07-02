@@ -181,8 +181,11 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         //정보 창을 군산대학교 좌표에 열음
         infoWindow.setPosition(coord);
-        infoWindow.open(naverMap);
+        //infoWindow.open(naverMap);
 
-        infoWindow.close(); // 정보 창을 닫음
+        //infoWindow.close(); // 정보 창을 닫음
+
+        infoWindow.setMap(naverMap); //map 속성을 이용해 정보창을 열음
+        infoWindow.setMap(null);//map 속성을 이용해 정보창을 닫음
     }
 }
