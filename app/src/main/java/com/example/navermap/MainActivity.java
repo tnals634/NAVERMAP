@@ -301,10 +301,12 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 //        coords.set(0, new LatLng(37.5734571, 126.975335));// 아직 반영되지 않음
 //        polygon.setCoords(coords);// 반영됨
 
-        polygon.setHoles(Collections.singletonList(Arrays.asList(
-                new LatLng(37.5612243, 126.9768938),
-                new LatLng(37.5627692, 126.9795502),
-                new LatLng(37.5628377, 126.976066)
-        )));
+//        polygon.setHoles(Collections.singletonList(Arrays.asList(
+//                new LatLng(37.5612243, 126.9768938),
+//                new LatLng(37.5627692, 126.9795502),
+//                new LatLng(37.5628377, 126.976066)
+//        )));
+
+        polygon.setColor(Color.BLUE); //폴리곤 오버레이의 면색상 지정
     }
 }
