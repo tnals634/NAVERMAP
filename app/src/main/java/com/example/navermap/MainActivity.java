@@ -515,5 +515,12 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                 return (CharSequence)infoWindow.getMarker().getTag();
             }
         });
+        polyline.setCoords(Arrays.asList(
+                coord,
+                new LatLng(35.9673799,126.7366249),
+                new LatLng(35.969439,126.957327),
+                new LatLng(35.8441799,127.1289129)
+        )); // 폴리라인 오버레이 객체 생성
+        polyline.setMap(naverMap);
     }
 }
