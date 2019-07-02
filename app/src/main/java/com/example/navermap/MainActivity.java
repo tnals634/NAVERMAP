@@ -137,7 +137,8 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 //        marker.setIcon(OverlayImage.fromResource(R.drawable.marker_icon));
         marker.setWidth(60);
         marker.setHeight(80);
-        marker.setAngle(90);
+        //marker.setAngle(90);
+        marker.setFlat(true);
         marker.setMap(naverMap);
 
     }
