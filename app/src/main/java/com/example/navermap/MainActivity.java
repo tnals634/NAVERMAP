@@ -431,16 +431,21 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         //arrowheadPath.setMap(null); //화살표 오버레이 지도에서 제거
 
-        //화살표 오버레이 좌표열 중 일부 변경
-        List<LatLng> coords = new ArrayList<>();
-        Collections.addAll(coords,
-                new LatLng(37.568003, 126.9772503),
-                new LatLng(37.5701573, 126.9772503),
-                new LatLng(37.5701573, 126.9793745)
-        );
-        arrowheadPath.setCoords(coords);
+//        //화살표 오버레이 좌표열 중 일부 변경
+//        List<LatLng> coords = new ArrayList<>();
+//        Collections.addAll(coords,
+//                new LatLng(37.568003, 126.9772503),
+//                new LatLng(37.5701573, 126.9772503),
+//                new LatLng(37.5701573, 126.9793745)
+//        );
+//        arrowheadPath.setCoords(coords);
+//
+//        coords.set(0, new LatLng(37.5734571, 126.975335));// 아직 반영되지 않음
+//        arrowheadPath.setCoords(coords);// 반영됨
 
-        coords.set(0, new LatLng(37.5734571, 126.975335));// 아직 반영되지 않음
-        arrowheadPath.setCoords(coords);// 반영됨
+        arrowheadPath.setWidth(20); // 화살표 오버레이의 두께 지정
+        arrowheadPath.setHeadSizeRatio(4); //화살표 오버레이의 머리크기를 두께의 4배로 지정
+        arrowheadPath.setColor(Color.GREEN); // 화살표 오버레이의 색상 지정
+        arrowheadPath.setOutlineColor(Color.BLUE); // 화살표 오버레이의 테두리 색상 지정
     }
 }
