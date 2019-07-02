@@ -479,6 +479,41 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         marker4.setHeight(80);
         marker4.setMap(naverMap);
 
+        marker1.setTag("군산대학교");
+        marker1.setOnClickListener(overlay -> {
+            //마커를 클릭할 때 정보창을 엶
+            infoWindow.open(marker1);
+            return true;
+        });
 
+        marker2.setTag("군산시청");
+        marker2.setOnClickListener(overlay -> {
+            //마커를 클릭할 때 정보창을 엶
+            infoWindow.open(marker2);
+            return true;
+        });
+
+        marker3.setTag("원광대학교");
+        marker3.setOnClickListener(overlay -> {
+            //마커를 클릭할 때 정보창을 엶
+            infoWindow.open(marker3);
+            return true;
+        });
+
+        marker4.setTag("전북대학교");
+        marker4.setOnClickListener(overlay -> {
+            //마커를 클릭할 때 정보창을 엶
+            infoWindow.open(marker4);
+            return true;
+        });
+
+        infoWindow.setAdapter(new InfoWindow.DefaultTextAdapter( this) {
+            @NonNull
+            @Override
+            public CharSequence getText(@NonNull InfoWindow infoWindow) {
+                //정보 창이 열린 마커의 tag를 텍스트로 노출하도록 반환
+                return (CharSequence)infoWindow.getMarker().getTag();
+            }
+        });
     }
 }
