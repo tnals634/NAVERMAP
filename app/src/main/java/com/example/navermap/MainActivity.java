@@ -9,13 +9,16 @@ import androidx.fragment.app.FragmentManager;
 import android.graphics.Color;
 import android.graphics.PointF;
 import android.os.Bundle;
+import android.telecom.CallScreeningService;
 import android.view.View;
 import android.widget.ListAdapter;
 import android.widget.Toast;
 
 import com.naver.maps.geometry.LatLng;
 import com.naver.maps.geometry.LatLngBounds;
+import com.naver.maps.map.CameraAnimation;
 import com.naver.maps.map.CameraPosition;
+import com.naver.maps.map.CameraUpdate;
 import com.naver.maps.map.LocationTrackingMode;
 import com.naver.maps.map.MapFragment;
 import com.naver.maps.map.NaverMap;
@@ -76,6 +79,8 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         }
         super.onRequestPermissionsResult(requestCode,permissions,grantResults);
     }
+
+
     @UiThread
     @Override
     public void onMapReady(@NonNull NaverMap naverMap) {
@@ -91,12 +96,13 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         Marker marker3 = new Marker();
         Marker marker4 = new Marker();
 
-        CameraPosition cameraPosition =
-                new CameraPosition(new LatLng(35.969856,126.936638), 9,45,0);
-        naverMap.setCameraPosition(cameraPosition);
+//        CameraPosition cameraPosition =
+//                new CameraPosition(new LatLng(35.969856,126.936638), 9,45,0);
+//        naverMap.setCameraPosition(cameraPosition);
+
         //naverMap.setMapType(NaverMap.MapType.Hybrid);
 
-        //UiSettings uiSettings = naverMap.getUiSettings();
+        UiSettings uiSettings = naverMap.getUiSettings();
         //uiSettings.setCompassEnabled(false); //나침반 비활성화
         //uiSettings.setLocationButtonEnabled(true); //현위치 버튼 활성화
 
@@ -450,6 +456,9 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 //        arrowheadPath.setColor(Color.GREEN); // 화살표 오버레이의 색상 지정
 //        arrowheadPath.setOutlineColor(Color.BLUE); // 화살표 오버레이의 테두리 색상 지정
 
+        LatLngBounds bounds = new LatLngBounds(coord,new LatLng(35.8441799,127.1289129));
+        CameraUpdate cameraUpdate = CameraUpdate.fitBounds(bounds,20); //두 지점의 값을 가져와서 그 중심을 기점으로 모든 지점을 보여줌
+        naverMap.moveCamera(cameraUpdate);
 
         marker1.setPosition(coord); //군산대
         marker1.setIconPerspectiveEnabled(true);
