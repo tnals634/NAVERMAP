@@ -40,10 +40,13 @@ import com.naver.maps.map.overlay.PolylineOverlay;
 import com.naver.maps.map.util.FusedLocationSource;
 import com.naver.maps.map.util.MarkerIcons;
 
+import java.lang.reflect.Array;
+import java.lang.reflect.Member;
 import java.nio.channels.AsynchronousFileChannel;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements OnMapReadyCallback {
@@ -80,19 +83,29 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         super.onRequestPermissionsResult(requestCode,permissions,grantResults);
     }
 
+//    public void MarkerMake(@NonNull NaverMap naverMap, Marker marker, LatLng latLng)
+//    {
+//        marker.setPosition(latLng);
+//        marker.setIconPerspectiveEnabled(true);
+//        marker.setIcon(MarkerIcons.BLACK); //해당 색으로 지정
+//        marker.setWidth(50);
+//        marker.setHeight(80);
+//        marker.setMap(naverMap);
+//    }
+
 
     @UiThread
     @Override
     public void onMapReady(@NonNull NaverMap naverMap) {
         LatLng coord = new LatLng(35.9423408, 126.6832079);
-        Marker marker1 = new Marker();
-        Marker marker2 = new Marker();
         InfoWindow infoWindow = new InfoWindow();
         PolylineOverlay polyline = new PolylineOverlay();
-        CircleOverlay circle = new CircleOverlay();
-        PathOverlay path = new PathOverlay();
-        MultipartPathOverlay multipartPath = new MultipartPathOverlay();
-        ArrowheadPathOverlay arrowheadPath = new ArrowheadPathOverlay();
+//        CircleOverlay circle = new CircleOverlay();
+//        PathOverlay path = new PathOverlay();
+//        MultipartPathOverlay multipartPath = new MultipartPathOverlay();
+//        ArrowheadPathOverlay arrowheadPath = new ArrowheadPathOverlay();
+        Marker marker1 = new Marker();
+        Marker marker2 = new Marker();
         Marker marker3 = new Marker();
         Marker marker4 = new Marker();
 
@@ -460,70 +473,118 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         CameraUpdate cameraUpdate = CameraUpdate.fitBounds(bounds,20); //두 지점의 값을 가져와서 그 중심을 기점으로 모든 지점을 보여줌
         naverMap.moveCamera(cameraUpdate);
 
-        marker1.setPosition(coord); //군산대
-        marker1.setIconPerspectiveEnabled(true);
-        marker1.setIcon(MarkerIcons.BLACK); //해당 색으로 지정
-        marker1.setWidth(50);
-        marker1.setHeight(80);
-        marker1.setMap(naverMap);
+//        //함수를 선언..
+//        MarkerMake(naverMap,marker1,coord);
+//        MarkerMake(naverMap,marker2,new LatLng(35.9673799,126.7366249));
+//        MarkerMake(naverMap,marker3,new LatLng(35.969439,126.957327));
+//        MarkerMake(naverMap,marker4,new LatLng(35.8441799,127.1289129));
+//        //
 
-        marker2.setPosition(new LatLng(35.9673799,126.7366249)); //군산시청
-        marker2.setIconPerspectiveEnabled(true);
-        marker2.setIcon(MarkerIcons.BLACK); //해당 색으로 지정
-        marker2.setWidth(50);
-        marker2.setHeight(80);
-        marker2.setMap(naverMap);
+        double[] pointX = {35.9423408,35.9673799,35.969439,35.8441799};
+        double[] pointY = {126.6832079,126.7366249,126.957327,127.1289129};
+        String[] name = {"군산대학교","군산시청","원광대학교","전북대학교"};
+        Marker[] marker = {marker1,marker2,marker3,marker4};
+        ArrayList<LatLng> list = new ArrayList<>();
+        ArrayList<Marker> markers = new ArrayList<>();
+        ArrayList<String> names = new ArrayList<>();
 
-        marker3.setPosition(new LatLng(35.969439,126.957327)); //원광대
-        marker3.setIconPerspectiveEnabled(true);
-        marker3.setIcon(MarkerIcons.BLACK); //해당 색으로 지정
-        marker3.setWidth(50);
-        marker3.setHeight(80);
-        marker3.setMap(naverMap);
+        for(int i=0;i<marker.length;i++)
+        {
+            list.add(new LatLng(pointX[i],pointY[i]));
+            markers.add(marker[i]);
+            names.add(name[i]);
+        }
 
-        marker4.setPosition(new LatLng(35.8441799,127.1289129)); //전북대
-        marker4.setIconPerspectiveEnabled(true);
-        marker4.setIcon(MarkerIcons.BLACK); //해당 색으로 지정
-        marker4.setWidth(50);
-        marker4.setHeight(80);
-        marker4.setMap(naverMap);
+        for(int i=0;i<marker.length;i++)
+        {
+            markers.get(i).setPosition(list.get(i));
+            markers.get(i).setIconPerspectiveEnabled(true);
+            markers.get(i).setIcon(MarkerIcons.BLACK);
+            markers.get(i).setWidth(50);
+            markers.get(i).setHeight(80);
+            markers.get(i).setMap(naverMap);
 
-        marker1.setTag("군산대학교");
-        marker1.setOnClickListener(overlay -> {
-            //마커를 클릭할 때 정보창을 엶
-            infoWindow.open(marker1);
-            return true;
-        });
+            markers.get(i).setTag(names.get(i));
+            markers.get(i).setOnClickListener(overlay -> {
+                //마커를 클릭할 때 정보창을 엶
+                infoWindow.open(markers.get(i));
+                return true;
+            });
 
-        marker2.setTag("군산시청");
-        marker2.setOnClickListener(overlay -> {
-            //마커를 클릭할 때 정보창을 엶
-            infoWindow.open(marker2);
-            return true;
-        });
+            infoWindow.setAdapter(new InfoWindow.DefaultTextAdapter( this) {
+                @NonNull
+                @Override
+                public CharSequence getText(@NonNull InfoWindow infoWindow) {
+                    //정보 창이 열린 마커의 tag를 텍스트로 노출하도록 반환
+                    return (CharSequence)infoWindow.getMarker().getTag();
+                }
+            });
+        }
+//        marker1.setPosition(coord); //군산대
+//        marker1.setIconPerspectiveEnabled(true);
+//        marker1.setIcon(MarkerIcons.BLACK); //해당 색으로 지정
+//        marker1.setWidth(50);
+//        marker1.setHeight(80);
+//        marker1.setMap(naverMap);
+//
+//        marker2.setPosition(new LatLng(35.9673799,126.7366249)); //군산시청
+//        marker2.setIconPerspectiveEnabled(true);
+//        marker2.setIcon(MarkerIcons.BLACK); //해당 색으로 지정
+//        marker2.setWidth(50);
+//        marker2.setHeight(80);
+//        marker2.setMap(naverMap);
+//
+//        marker3.setPosition(new LatLng(35.969439,126.957327)); //원광대
+//        marker3.setIconPerspectiveEnabled(true);
+//        marker3.setIcon(MarkerIcons.BLACK); //해당 색으로 지정
+//        marker3.setWidth(50);
+//        marker3.setHeight(80);
+//        marker3.setMap(naverMap);
+//
+//        marker4.setPosition(new LatLng(35.8441799,127.1289129)); //전북대
+//        marker4.setIconPerspectiveEnabled(true);
+//        marker4.setIcon(MarkerIcons.BLACK); //해당 색으로 지정
+//        marker4.setWidth(50);
+//        marker4.setHeight(80);
+//        marker4.setMap(naverMap);
 
-        marker3.setTag("원광대학교");
-        marker3.setOnClickListener(overlay -> {
-            //마커를 클릭할 때 정보창을 엶
-            infoWindow.open(marker3);
-            return true;
-        });
+//        marker1.setTag("군산대학교");
+//        marker1.setOnClickListener(overlay -> {
+//            //마커를 클릭할 때 정보창을 엶
+//            infoWindow.open(marker1);
+//            return true;
+//        });
+//
+//        marker2.setTag("군산시청");
+//        marker2.setOnClickListener(overlay -> {
+//            //마커를 클릭할 때 정보창을 엶
+//            infoWindow.open(marker2);
+//            return true;
+//        });
+//
+//        marker3.setTag("원광대학교");
+//        marker3.setOnClickListener(overlay -> {
+//            //마커를 클릭할 때 정보창을 엶
+//            infoWindow.open(marker3);
+//            return true;
+//        });
+//
+//        marker4.setTag("전북대학교");
+//        marker4.setOnClickListener(overlay -> {
+//            //마커를 클릭할 때 정보창을 엶
+//            infoWindow.open(marker4);
+//            return true;
+//        });
 
-        marker4.setTag("전북대학교");
-        marker4.setOnClickListener(overlay -> {
-            //마커를 클릭할 때 정보창을 엶
-            infoWindow.open(marker4);
-            return true;
-        });
-
-        infoWindow.setAdapter(new InfoWindow.DefaultTextAdapter( this) {
-            @NonNull
-            @Override
-            public CharSequence getText(@NonNull InfoWindow infoWindow) {
-                //정보 창이 열린 마커의 tag를 텍스트로 노출하도록 반환
-                return (CharSequence)infoWindow.getMarker().getTag();
-            }
-        });
+//
+//        infoWindow.setAdapter(new InfoWindow.DefaultTextAdapter( this) {
+//            @NonNull
+//            @Override
+//            public CharSequence getText(@NonNull InfoWindow infoWindow) {
+//                //정보 창이 열린 마커의 tag를 텍스트로 노출하도록 반환
+//                return (CharSequence)infoWindow.getMarker().getTag();
+//            }
+//        });
         polyline.setCoords(Arrays.asList(
                 coord,
                 new LatLng(35.9673799,126.7366249),
