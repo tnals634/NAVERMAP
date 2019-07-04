@@ -17,8 +17,23 @@
         android:name="com.naver.maps.map.MapFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginTop="16dp"
+        app:layout_constraintTop_toTopOf="parent"
         app:navermap_locationButtonEnabled="true"
-        app:navermap_tiltGesturesEnabled="false" /> <!--xml 속성을 사용해 현위치 버튼 활성화, 틸트 비활성화-->
+        app:navermap_tiltGesturesEnabled="false"
+        tools:layout_editor_absoluteX="32dp" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="16dp"
+        android:hint="@string/Click"
+        android:text="@string/Click"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" /> <!--xml 속성을 사용해 현위치 버튼 활성화, 틸트 비활성화-->
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

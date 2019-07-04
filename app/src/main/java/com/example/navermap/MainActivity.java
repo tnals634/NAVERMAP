@@ -6,11 +6,13 @@ import androidx.annotation.UiThread;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 
+import android.content.Context;
 import android.graphics.Color;
 import android.graphics.PointF;
 import android.os.Bundle;
 import android.telecom.CallScreeningService;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ListAdapter;
 import android.widget.Toast;
 
@@ -60,27 +62,27 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         setContentView(R.layout.activity_main);
 
-        FragmentManager fm = getSupportFragmentManager();
-        MapFragment mapFragment = (MapFragment)fm.findFragmentById(R.id.map);
+        FragmentManager fm = getSupportFragmentManager( );
+        MapFragment mapFragment = (MapFragment) fm.findFragmentById(R.id.map);
 
 
         if (mapFragment == null) {
-            mapFragment = MapFragment.newInstance();
-            fm.beginTransaction().add(R.id.map, mapFragment).commit();
+            mapFragment = MapFragment.newInstance( );
+            fm.beginTransaction( ).add(R.id.map, mapFragment).commit( );
         }
-        locationSource = new FusedLocationSource(this,LOCATION_PERMISSION_REQUEST_CODE);
+        locationSource = new FusedLocationSource(this, LOCATION_PERMISSION_REQUEST_CODE);
         mapFragment.getMapAsync(this);
 
     }
 
     @Override
     public void onRequestPermissionsResult(int requestCode,
-                                           @NonNull String[] permissions, @NonNull int[] grantResults){
-        if(locationSource.onRequestPermissionsResult(
-                requestCode,permissions,grantResults)){
+                                           @NonNull String[] permissions, @NonNull int[] grantResults) {
+        if (locationSource.onRequestPermissionsResult(
+                requestCode, permissions, grantResults)) {
             return;
         }
-        super.onRequestPermissionsResult(requestCode,permissions,grantResults);
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
 
 //    public void MarkerMake(@NonNull NaverMap naverMap, Marker marker, LatLng latLng)
@@ -93,29 +95,27 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 //        marker.setMap(naverMap);
 //    }
 
-
     @UiThread
     @Override
     public void onMapReady(@NonNull NaverMap naverMap) {
         LatLng coord = new LatLng(35.9423408, 126.6832079);
-        InfoWindow infoWindow = new InfoWindow();
-        PolylineOverlay polyline = new PolylineOverlay();
+        InfoWindow infoWindow = new InfoWindow( );
+        PolylineOverlay polyline = new PolylineOverlay( );
 //        CircleOverlay circle = new CircleOverlay();
 //        PathOverlay path = new PathOverlay();
 //        MultipartPathOverlay multipartPath = new MultipartPathOverlay();
 //        ArrowheadPathOverlay arrowheadPath = new ArrowheadPathOverlay();
-        Marker marker1 = new Marker();
-        Marker marker2 = new Marker();
-        Marker marker3 = new Marker();
-        Marker marker4 = new Marker();
-
+        Marker marker1 = new Marker( );
+        Marker marker2 = new Marker( );
+        Marker marker3 = new Marker( );
+        Marker marker4 = new Marker( );
 //        CameraPosition cameraPosition =
 //                new CameraPosition(new LatLng(35.969856,126.936638), 9,45,0);
 //        naverMap.setCameraPosition(cameraPosition);
 
         //naverMap.setMapType(NaverMap.MapType.Hybrid);
 
-        UiSettings uiSettings = naverMap.getUiSettings();
+        UiSettings uiSettings = naverMap.getUiSettings( );
         //uiSettings.setCompassEnabled(false); //나침반 비활성화
         //uiSettings.setLocationButtonEnabled(true); //현위치 버튼 활성화
 
@@ -123,10 +123,10 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         //uiSettings.setRotateGesturesEnabled(false); // 회전 제스처 비활성화
 
         //NaverMapOptions options = new NaverMapOptions()
-                //.locationButtonEnabled(true)
-                //.tiltGesturesEnabled(false); //초깃값 지정시 현위치 버튼 활성화, 틸트 제스처 비활성화
+        //.locationButtonEnabled(true)
+        //.tiltGesturesEnabled(false); //초깃값 지정시 현위치 버튼 활성화, 틸트 제스처 비활성화
 
-        
+
 //        naverMap.setOnMapClickListener((pointF, latLng) ->
 //                Toast.makeText(this,latLng.latitude+", "+ latLng.longitude,
 //                        Toast.LENGTH_SHORT).show()); //클릭시 좌표 뜸
@@ -135,7 +135,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 //                Toast.makeText(this,latLng.latitude + ", " +latLng.longitude,
 //                        Toast.LENGTH_SHORT).show()); //롱클릭시 좌표 뜸
 
-        
+
 //        naverMap.setOnMapClickListener((pointF, latLng) ->
 //                Toast.makeText(this,"지도 클릭", Toast.LENGTH_SHORT).show());
 //
@@ -172,7 +172,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 //                Toast.LENGTH_SHORT).show()); //위치 위도 경도 뜸
 
 
-        LocationOverlay locationOverlay = naverMap.getLocationOverlay();
+        LocationOverlay locationOverlay = naverMap.getLocationOverlay( );
 //
 //        marker.setPosition(coord);
 //        marker.setIcon(MarkerIcons.BLACK); //해당 색으로 지정
@@ -469,57 +469,17 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 //        arrowheadPath.setColor(Color.GREEN); // 화살표 오버레이의 색상 지정
 //        arrowheadPath.setOutlineColor(Color.BLUE); // 화살표 오버레이의 테두리 색상 지정
 
-        LatLngBounds bounds = new LatLngBounds(coord,new LatLng(35.8441799,127.1289129));
-        CameraUpdate cameraUpdate = CameraUpdate.fitBounds(bounds,20); //두 지점의 값을 가져와서 그 중심을 기점으로 모든 지점을 보여줌
-        naverMap.moveCamera(cameraUpdate);
+//        LatLngBounds bounds = new LatLngBounds(coord,new LatLng(35.8441799,127.1289129));
+//        CameraUpdate cameraUpdate = CameraUpdate.fitBounds(bounds,20); //두 지점의 값을 가져와서 그 중심을 기점으로 모든 지점을 보여줌
+//        naverMap.moveCamera(cameraUpdate);
 
-//        //함수를 선언..
+//        //함수를 선언하여 만듬
 //        MarkerMake(naverMap,marker1,coord);
 //        MarkerMake(naverMap,marker2,new LatLng(35.9673799,126.7366249));
 //        MarkerMake(naverMap,marker3,new LatLng(35.969439,126.957327));
 //        MarkerMake(naverMap,marker4,new LatLng(35.8441799,127.1289129));
 //        //
 
-        double[] pointX = {35.9423408,35.9673799,35.969439,35.8441799};
-        double[] pointY = {126.6832079,126.7366249,126.957327,127.1289129};
-        String[] name = {"군산대학교","군산시청","원광대학교","전북대학교"};
-        Marker[] marker = {marker1,marker2,marker3,marker4};
-        ArrayList<LatLng> list = new ArrayList<>();
-        ArrayList<Marker> markers = new ArrayList<>();
-        ArrayList<String> names = new ArrayList<>();
-
-        for(int i=0;i<marker.length;i++)
-        {
-            list.add(new LatLng(pointX[i],pointY[i]));
-            markers.add(marker[i]);
-            names.add(name[i]);
-        }
-
-        for(int i=0;i<marker.length;i++)
-        {
-            markers.get(i).setPosition(list.get(i));
-            markers.get(i).setIconPerspectiveEnabled(true);
-            markers.get(i).setIcon(MarkerIcons.BLACK);
-            markers.get(i).setWidth(50);
-            markers.get(i).setHeight(80);
-            markers.get(i).setMap(naverMap);
-
-            markers.get(i).setTag(names.get(i));
-            markers.get(i).setOnClickListener(overlay -> {
-                //마커를 클릭할 때 정보창을 엶
-                infoWindow.open(markers.get(i));
-                return true;
-            });
-
-            infoWindow.setAdapter(new InfoWindow.DefaultTextAdapter( this) {
-                @NonNull
-                @Override
-                public CharSequence getText(@NonNull InfoWindow infoWindow) {
-                    //정보 창이 열린 마커의 tag를 텍스트로 노출하도록 반환
-                    return (CharSequence)infoWindow.getMarker().getTag();
-                }
-            });
-        }
 //        marker1.setPosition(coord); //군산대
 //        marker1.setIconPerspectiveEnabled(true);
 //        marker1.setIcon(MarkerIcons.BLACK); //해당 색으로 지정
@@ -585,12 +545,97 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 //                return (CharSequence)infoWindow.getMarker().getTag();
 //            }
 //        });
+//        polyline.setCoords(Arrays.asList(
+//                coord,
+//                new LatLng(35.9673799,126.7366249),
+//                new LatLng(35.969439,126.957327),
+//                new LatLng(35.8441799,127.1289129)
+//        )); // 폴리라인 오버레이 객체 생성
+//        polyline.setMap(naverMap);
+
+        LatLngBounds bounds = new LatLngBounds(coord, new LatLng(35.8441799, 127.1289129));
+        CameraUpdate cameraUpdate = CameraUpdate.fitBounds(bounds, 20); //두 지점의 값을 가져와서 그 중심을 기점으로 모든 지점을 보여줌
+        naverMap.moveCamera(cameraUpdate);
+
+        double[] pointX = {35.9423408, 35.9673799, 35.969439, 35.8441799};
+        double[] pointY = {126.6832079, 126.7366249, 126.957327, 127.1289129};
+        String[] name = {"군산대학교", "군산시청", "원광대학교", "전북대학교"};
+        Marker[] marker = {marker1, marker2, marker3, marker4};
+        ArrayList<LatLng> list = new ArrayList<>( );
+        ArrayList<Marker> markers = new ArrayList<>( );
+        for (int i = 0; i < marker.length; i++) {
+            list.add(new LatLng(pointX[i], pointY[i]));
+            markers.add(marker[i]);
+        }
+        for (int i = 0; i < marker.length; i++) {
+            markers.get(i).setPosition(list.get(i));
+            markers.get(i).setIconPerspectiveEnabled(true);
+            markers.get(i).setIcon(MarkerIcons.BLACK);
+            markers.get(i).setWidth(50);
+            markers.get(i).setHeight(80);
+            markers.get(i).setMap(naverMap);
+            markers.get(i).setTag(name[i]);
+        }
+
+        markers.get(0).setOnClickListener(overlay -> {
+            //마커를 클릭할 때 정보창을 엶
+            infoWindow.open(markers.get(0));
+            return true;
+        });
+        markers.get(1).setOnClickListener(overlay -> {
+            //마커를 클릭할 때 정보창을 엶
+            infoWindow.open(markers.get(1));
+            return true;
+        });
+        markers.get(2).setOnClickListener(overlay -> {
+            //마커를 클릭할 때 정보창을 엶
+            infoWindow.open(markers.get(2));
+            return true;
+        });
+        markers.get(3).setOnClickListener(overlay -> {
+            //마커를 클릭할 때 정보창을 엶
+            infoWindow.open(markers.get(3));
+            return true;
+        });
+
+        infoWindow.setAdapter(new InfoWindow.DefaultTextAdapter(this) {
+            @NonNull
+            @Override
+            public CharSequence getText(@NonNull InfoWindow infoWindow) {
+                //정보 창이 열린 마커의 tag를 텍스트로 노출하도록 반환
+                return (CharSequence) infoWindow.getMarker( ).getTag( );
+            }
+        });
+
         polyline.setCoords(Arrays.asList(
                 coord,
-                new LatLng(35.9673799,126.7366249),
-                new LatLng(35.969439,126.957327),
-                new LatLng(35.8441799,127.1289129)
+                new LatLng(35.9673799, 126.7366249),
+                new LatLng(35.969439, 126.957327),
+                new LatLng(35.8441799, 127.1289129)
         )); // 폴리라인 오버레이 객체 생성
         polyline.setMap(naverMap);
+
+        Button button = (Button) findViewById(R.id.button);
+        button.setOnClickListener(new Button.OnClickListener(){
+            @Override
+            public void onClick(View view){
+
+                if (markers.get(0).getInfoWindow()==null) {
+                    for(int i=0;i<pointX.length;i++)
+                    {
+                        markers.get(i).setMap(naverMap);
+                        infoWindow.open(markers.get(i));
+                        polyline.setMap(naverMap);
+                    }
+                } else {
+                    for(int i=0;i<pointX.length;i++)
+                    {
+                        markers.get(i).setMap(null);
+                        infoWindow.close();
+                        polyline.setMap(null);
+                    }
+                }
+            }
+        });
     }
 }
