@@ -620,7 +620,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
             @Override
             public void onClick(View view){
 
-                if (markers.get(0).getInfoWindow()==null) {
+                if (markers.get(0).getMap()==null) {
                     for(int i=0;i<pointX.length;i++)
                     {
                         markers.get(i).setMap(naverMap);
