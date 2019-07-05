@@ -575,28 +575,13 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
             markers.get(i).setHeight(80);
             markers.get(i).setMap(naverMap);
             markers.get(i).setTag(name[i]);
+            int finall = i;
+            markers.get(finall).setOnClickListener(overlay -> {
+                //마커를 클릭할 때 정보창을 엶
+                infoWindow.open(markers.get(finall));
+                return true;
+            });
         }
-
-        markers.get(0).setOnClickListener(overlay -> {
-            //마커를 클릭할 때 정보창을 엶
-            infoWindow.open(markers.get(0));
-            return true;
-        });
-        markers.get(1).setOnClickListener(overlay -> {
-            //마커를 클릭할 때 정보창을 엶
-            infoWindow.open(markers.get(1));
-            return true;
-        });
-        markers.get(2).setOnClickListener(overlay -> {
-            //마커를 클릭할 때 정보창을 엶
-            infoWindow.open(markers.get(2));
-            return true;
-        });
-        markers.get(3).setOnClickListener(overlay -> {
-            //마커를 클릭할 때 정보창을 엶
-            infoWindow.open(markers.get(3));
-            return true;
-        });
 
         infoWindow.setAdapter(new InfoWindow.DefaultTextAdapter(this) {
             @NonNull
@@ -637,5 +622,22 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                 }
             }
         });
+
+//        naverMap.setOnMapLongClickListener((pointF, latLng) ->
+//                Toast.makeText(this,latLng.latitude + ", " +latLng.longitude,
+//                        Toast.LENGTH_SHORT).show()); //롱클릭시 toast로 좌표 뜸
+
+        naverMap.setOnMapLongClickListener((pointF, latLng) -> {
+
+            infoWindow.setAdapter(new InfoWindow.DefaultTextAdapter( this) {
+                @NonNull
+                @Override
+                public CharSequence getText(@NonNull InfoWindow infoWindow) {
+                    return latLng.latitude+", "+latLng.longitude;
+                }
+            });
+            infoWindow.setPosition(latLng);
+            infoWindow.open(naverMap);
+        }); //롱 클릭시 정보창으로 좌표 뜸
     }
 }
