@@ -12,8 +12,10 @@ import android.graphics.PointF;
 import android.os.Bundle;
 import android.telecom.CallScreeningService;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListAdapter;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import com.naver.maps.geometry.LatLng;
@@ -55,6 +57,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1000;
     private FusedLocationSource locationSource;
+    static final String[] LIST_MENU = {"Basic","Navi","Satellite","Hybrid","Terrain"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,6 +75,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         }
         locationSource = new FusedLocationSource(this, LOCATION_PERMISSION_REQUEST_CODE);
         mapFragment.getMapAsync(this);
+
 
     }
 
@@ -639,5 +643,18 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
             infoWindow.setPosition(latLng);
             infoWindow.open(naverMap);
         }); //롱 클릭시 정보창으로 좌표 뜸
+
+        ArrayAdapter adapter = new ArrayAdapter(this,android.R.layout.simple_expandable_list_item_1,LIST_MENU);
+        ListView listView = (ListView) findViewById(R.id.listview);
+
+
+        Button button2 = (Button) findViewById(R.id.button2);
+        button.setOnClickListener(new Button.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                listView.setAdapter(adapter);
+
+            }
+        });
     }
 }

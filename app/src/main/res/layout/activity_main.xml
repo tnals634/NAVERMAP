@@ -17,11 +17,13 @@
         android:name="com.naver.maps.map.MapFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="32dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:navermap_locationButtonEnabled="true"
-        app:navermap_tiltGesturesEnabled="false"
-        tools:layout_editor_absoluteX="32dp" />
+        app:navermap_tiltGesturesEnabled="false" /> <!--xml 속성을 사용해 현위치 버튼 활성화, 틸트 비활성화-->
 
     <Button
         android:id="@+id/button"
@@ -33,7 +35,34 @@
         android:hint="@string/Click"
         android:text="@string/Click"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" /> <!--xml 속성을 사용해 현위치 버튼 활성화, 틸트 비활성화-->
+        app:layout_constraintEnd_toEndOf="parent" />
 
+    <ListView
+        android:id="@+id/listview"
+        android:layout_width="0dp"
+        android:layout_height="32dp"
+        android:layout_marginTop="48dp"
+        android:choiceMode="singleChoice"
+        android:divider="#ffcc22"
+        android:dividerHeight="1.5dp"
+        android:visibility="visible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:visibility="@string/list" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:text="@string/Click2"
+        app:layout_constraintBaseline_toBaselineOf="@+id/listview"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
